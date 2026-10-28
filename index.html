@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PQ Coach Online · Cuestionario Inicial del Atleta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Canvas Confetti para efecto de celebración -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+  <!-- Fondo con degradado ambiental y efectos de luz -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-left"></div>
+  <div class="ambient-glow glow-right"></div>
+
+  <main class="app-container">
+      <!-- Header Branding con Logo Oficial Transparente -->
+      <header class="brand-header">
+        <div class="logo-wrapper">
+          <img src="logo.png" alt="PQ Coach Online Logo" class="brand-logo" onerror="this.style.display='none'; document.getElementById('text-fallback-logo').style.display='block';">
+          <div id="text-fallback-logo" class="fallback-logo" style="display:none;">⚡ PQ COACH ONLINE</div>
+        </div>
+        <h1 class="brand-title">Cuestionario Inicial del Atleta</h1>
+        <p class="brand-subtitle">Formulario inteligente para un plan 100% personalizado</p>
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progressBar"></div>
+          </div>
+          <div class="step-indicators" id="stepIndicators">
+            <span class="step-pill active" data-step="1">1. Datos</span>
+            <span class="step-pill" data-step="2">2. Salud</span>
+            <span class="step-pill" data-step="3">3. Rutina & Pesaje</span>
+            <span class="step-pill" data-step="4">4. Gustos</span>
+            <span class="step-pill" data-step="5">5. Finalizar</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Card del Formulario -->
+      <section class="form-card">
+        <form id="onboardingForm" novalidate>
+
+          <!-- ==================================================== -->
+          <!-- PASO 1: DATOS BÁSICOS & CONTACTO                     -->
+          <!-- ==================================================== -->
+          <div class="form-step active" id="step-1">
+            <!-- Consejo del Coach integrado en el flujo -->
+            <div class="coach-tip-banner">
+              <span class="tip-icon">💡</span>
+              <p><strong>Consejo de tu Coach:</strong> Sé lo más transparente y sincero posible. En este cuestionario <em>no hay respuestas buenas ni malas</em>, solo la realidad con la que trabajaremos para diseñar tu plan.</p>
+            </div>
+
+            <div class="step-header">
+              <span class="step-badge">Paso 1 de 5</span>
+              <h2>Tus Datos Básicos & Contacto</h2>
+              <p>Información esencial para calcular tu gasto metabólico y configurar tu expediente.</p>
+            </div>
+
+            <div class="input-grid">
+              <div class="form-group full-width">
+                <label for="nombre">¿Cómo te llamas? (Nombre y Apellido) <span class="req">*</span></label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej: Carlos Mendoza" required autocomplete="name">
+              </div>
+
+              <div class="form-group full-width">
+                <label for="objetivo">🎯 ¿Cuál es tu objetivo principal? <span class="req">*</span></label>
+                <textarea id="objetivo" name="objetivo" rows="2" placeholder="Ej: Perder grasa abdominal, mantener masa muscular y definir..." required></textarea>
+                <small class="field-hint">Redacta con claridad lo que deseas lograr con tu asesoramiento.</small>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="email">✉️ Correo Electrónico (Gmail de preferencia) <span class="req">*</span></label>
+                <input type="email" id="email" name="email" placeholder="tu_correo@gmail.com" required autocomplete="email">
+                <small class="field-hint">📌 <strong>Muy importante:</strong> A este correo se te compartirá el acceso directo a tus hojas de cálculo, seguimiento y plan.</small>
+              </div>
+
+              <div class="form-group">
+                <label for="fechaNacimiento">Fecha de Nacimiento <span class="req">*</span></label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+              </div>
+
+              <div class="form-group">
+                <label>Sexo Biológico <span class="req">*</span></label>
+                <div class="radio-toggle-group">
+                  <label class="radio-toggle">
+                    <input type="radio" name="sexo" value="Hombre" required checked>
+                    <span class="toggle-btn"><span class="symbol">♂</span> Hombre</span>
+                  </label>
+                  <label class="radio-toggle">
+                    <input type="radio" name="sexo" value="Mujer" required>
+                    <span class="toggle-btn"><span class="symbol">♀</span> Mujer</span>
+                  </label>
+                </div>
+                <small class="field-hint">Esencial para el cálculo preciso de tu gasto metabólico basal.</small>
+              </div>
+
+              <div class="form-group">
+                <label for="peso">Peso Actual en Ayunas (kg) <span class="req">*</span></label>
+                <div class="input-with-unit">
+                  <input type="number" step="0.1" id="peso" name="peso" placeholder="78.5" required min="35" max="250">
+                  <span class="unit">kg</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="estatura">Estatura (cm) <span class="req">*</span></label>
+                <div class="input-with-unit">
+                  <input type="number" step="1" id="estatura" name="estatura" placeholder="176" required min="120" max="230">
+                  <span class="unit">cm</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="whatsapp">WhatsApp de Contacto <span class="req">*</span></label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="+51 999 999 999" required autocomplete="tel">
+                <small class="field-hint">Aquí recibirás tu plan y seguimiento directo de Piero.</small>
+              </div>
+
+              <div class="form-group">
+                <label for="instagram">Usuario de Instagram (Opcional)</label>
+                <input type="text" id="instagram" name="instagram" placeholder="@tu_usuario">
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <div></div>
+              <button type="button" class="btn btn-primary" onclick="nextStep(1)">
+                Siguiente: Salud & Digestión ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- ==================================================== -->
+          <!-- PASO 2: SALUD & DIGESTIÓN                            -->
+          <!-- ==================================================== -->
+          <div class="form-step" id="step-2">
+            <div class="step-header">
+              <span class="step-badge">Paso 2 de 5</span>
+              <h2>Tu Salud, Digestión & Medicación</h2>
+              <p>Queremos que no solo te veas bien, sino que tu digestión y energía funcionen al 100%.</p>
+            </div>
+
+            <div class="input-grid">
+              <div class="form-group full-width">
+                <label for="alergias">¿Tienes alguna alergia o intolerancia alimentaria diagnosticada? <span class="req">*</span></label>
+                <textarea id="alergias" name="alergias" rows="2" placeholder="Ej: Intolerancia severa a la lactosa, alergia a frutos secos (o pon 'Ninguna')" required></textarea>
+              </div>
+
+              <div class="form-group full-width">
+                <label>¿Cómo suele comportarse tu digestión en el día a día? <span class="req">*</span></label>
+                <small class="field-hint">Selecciona las que sientas con frecuencia:</small>
+                <div class="chips-container" id="chipsDigestion">
+                  <label class="chip-item">
+                    <input type="checkbox" name="digestion" value="Digestión ligera y sin molestias">
+                    <span>✨ Ligera y sin molestias</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="checkbox" name="digestion" value="Reflujo o acidez ocasional">
+                    <span>🔥 Reflujo o acidez</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="checkbox" name="digestion" value="Hinchazón o distensión abdominal">
+                    <span>🎈 Hinchazón después de comer</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="checkbox" name="digestion" value="Gases frecuentes">
+                    <span>💨 Gases frecuentes</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="checkbox" name="digestion" value="Estreñimiento o digestión lenta">
+                    <span>⏳ Digestión lenta o estreñimiento</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="checkbox" name="digestion" value="Digestión pesada con carnes o grasas">
+                    <span>🥩 Pesadez con carnes rojas/grasas</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="medicamentos">¿Tomas medicamentos o suplementos actualmente?</label>
+                <textarea id="medicamentos" name="medicamentos" rows="2" placeholder="Ej: Creatina, Proteína Whey, Multivitamínico, Magnesio (o pon 'Ninguno')"></textarea>
+              </div>
+
+              <!-- SECCIÓN EXCLUSIVA PARA MUJERES: SALUD FEMENINA & CICLO DEL PERIODO (Condicional) -->
+              <div id="seccionCicloMenstrual" class="conditional-card" style="display: none;">
+                <div class="conditional-header">
+                  <span class="conditional-badge">🌸 Salud Femenina & Ciclo del Periodo</span>
+                  <p class="field-hint">Información confidencial para que tu Coach entienda tus cambios naturales de energía, apetito y variaciones de peso a lo largo del mes.</p>
+                </div>
+
+                <div class="form-group full-width" style="margin-top: 14px;">
+                  <label for="regularidadCiclo">🌸 ¿Cómo suele ser tu periodo habitualmente? <span class="req">*</span></label>
+                  <select id="regularidadCiclo" name="regularidadCiclo">
+                    <option value="" disabled selected>Selecciona tu situación...</option>
+                    <option value="Regular (suele venir cada 26 a 32 días)">Regular (suele venir cada 26 a 32 días)</option>
+                    <option value="Irregular (las fechas varían con frecuencia)">Irregular (las fechas varían con frecuencia)</option>
+                    <option value="Uso anticonceptivos hormonales (pastillas, DIU, implante)">Uso anticonceptivos hormonales (pastillas, DIU, implante)</option>
+                    <option value="No tengo periodo activo (amenorrea, postparto, menopausia)">No tengo periodo activo actualmente</option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="fechaUltimaRegla">📅 ¿Cuándo comenzó aproximadamente tu último periodo? <span class="field-optional">(Opcional)</span></label>
+                  <input type="date" id="fechaUltimaRegla" name="fechaUltimaRegla">
+                  <small class="field-hint">Nos permite estimar en qué fase te encuentras para saber si retienes líquidos o tienes más apetito ciertos días.</small>
+                </div>
+
+                <!-- Sensaciones por Fases Clave -->
+                <div class="form-group full-width">
+                  <label>🌊 En los días previos a tu periodo (Fase Lútea), ¿sueles notar alguno de estos cambios?</label>
+                  <small class="field-hint">Selecciona las que experimentes con frecuencia antes de que te baje:</small>
+                  <div class="chips-container" id="chipsFaseLutea">
+                    <label class="chip-item">
+                      <input type="checkbox" name="sintomasLutea" value="Retención de líquidos (1 a 2 kg temporales en báscula)">
+                      <span>💧 Retención de líquidos (1 a 2 kg)</span>
+                    </label>
+                    <label class="chip-item">
+                      <input type="checkbox" name="sintomasLutea" value="Mayor apetito o antojos de dulces y carbohidratos">
+                      <span>🍫 Mayor apetito o antojos</span>
+                    </label>
+                    <label class="chip-item">
+                      <input type="checkbox" name="sintomasLutea" value="Mayor fatiga, pesadez o bajón de energía">
+                      <span>⚡ Mayor fatiga o cansancio</span>
+                    </label>
+                    <label class="chip-item">
+                      <input type="checkbox" name="sintomasLutea" value="Sensación de hinchazón o distensión abdominal">
+                      <span>🎈 Hinchazón o distensión</span>
+                    </label>
+                    <label class="chip-item">
+                      <input type="checkbox" name="sintomasLutea" value="No suelo notar cambios marcados">
+                      <span>✨ Suelo sentirme estable</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group full-width">
+                  <label>⚡ En los días posteriores a tu periodo (Fase Folicular), ¿cómo suele ser tu rendimiento?</label>
+                  <div class="chips-container" id="chipsFaseFolicular">
+                    <label class="chip-item">
+                      <input type="radio" name="energiaFolicular" value="Pico notable de energía, fuerza y mejor humor" checked>
+                      <span>🔥 Pico notable de energía y fuerza</span>
+                    </label>
+                    <label class="chip-item">
+                      <input type="radio" name="energiaFolicular" value="Energía normal y estable como siempre">
+                      <span>⚡ Energía normal y estable</span>
+                    </label>
+                    <label class="chip-item">
+                      <input type="radio" name="energiaFolicular" value="Me cuesta recuperarme un poco más">
+                      <span>⏳ Recuperación un poco más lenta</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
+                ⬅️ Atrás
+              </button>
+              <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                Siguiente: Rutina & Pesaje ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- ==================================================== -->
+          <!-- PASO 3: RUTINA, HORARIOS & DÍAS DE PESAJE            -->
+          <!-- ==================================================== -->
+          <div class="form-step" id="step-3">
+            <div class="step-header">
+              <span class="step-badge">Paso 3 de 5</span>
+              <h2>Tu Rutina, Horarios & Días de Pesaje</h2>
+              <p>Adaptaremos el plan a tus horarios de trabajo, entrenamiento y hábitos reales.</p>
+            </div>
+
+            <div class="input-grid">
+              <div class="form-group full-width">
+                <label for="comidasAlDia">Por tus horarios, ¿cuántas comidas te resulta más cómodo hacer en el día? <span class="req">*</span></label>
+                <select id="comidasAlDia" name="comidasAlDia" required>
+                  <option value="" disabled selected>Selecciona una opción...</option>
+                  <option value="3 comidas">3 comidas</option>
+                  <option value="4 comidas">4 comidas</option>
+                  <option value="5 comidas">5 comidas</option>
+                  <option value="6 comidas">6 comidas</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="horarioDesayuno">⏰ Horario habitual de Desayuno <span class="req">*</span></label>
+                <select id="horarioDesayuno" name="horarioDesayuno" required>
+                  <option value="" disabled selected>Selecciona un rango...</option>
+                  <option value="06:00 AM – 07:00 AM">06:00 AM – 07:00 AM (Madrugador)</option>
+                  <option value="07:00 AM – 08:30 AM">07:00 AM – 08:30 AM (Temprano)</option>
+                  <option value="08:30 AM – 10:00 AM">08:30 AM – 10:00 AM (Estándar)</option>
+                  <option value="10:00 AM – 11:30 AM">10:00 AM – 11:30 AM (Tardío)</option>
+                  <option value="12:00 PM o más tarde">12:00 PM o más tarde (Almuerzo como 1ra ingesta)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="horarioAlmuerzo">⏰ Horario habitual de Almuerzo <span class="req">*</span></label>
+                <select id="horarioAlmuerzo" name="horarioAlmuerzo" required>
+                  <option value="" disabled selected>Selecciona un rango...</option>
+                  <option value="12:00 PM – 01:00 PM">12:00 PM – 01:00 PM (Temprano)</option>
+                  <option value="01:00 PM – 02:00 PM">01:00 PM – 02:00 PM (Estándar)</option>
+                  <option value="02:00 PM – 03:30 PM">02:00 PM – 03:30 PM (Tardío)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="horarioCena">⏰ Horario habitual de Cena <span class="req">*</span></label>
+                <select id="horarioCena" name="horarioCena" required>
+                  <option value="" disabled selected>Selecciona un rango...</option>
+                  <option value="07:00 PM – 08:00 PM">07:00 PM – 08:00 PM (Temprano)</option>
+                  <option value="08:00 PM – 09:30 PM">08:00 PM – 09:30 PM (Estándar)</option>
+                  <option value="09:30 PM – 11:00 PM">09:30 PM – 11:00 PM (Nocturno)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="balanzaCocina">¿Tienes conocimiento sobre cómo usar la balanza de cocina? <span class="req">*</span></label>
+                <select id="balanzaCocina" name="balanzaCocina" required>
+                  <option value="" disabled selected>Selecciona una opción...</option>
+                  <option value="Sí tengo conocimiento">Sí tengo conocimiento</option>
+                  <option value="No (consultar por privado)">No (consultar por privado)</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="modoPesajeAlimentos">¿Cómo prefieres pesar tus alimentos en tu día a día? <span class="req">*</span></label>
+                <select id="modoPesajeAlimentos" name="modoPesajeAlimentos" required>
+                  <option value="MIXTO (Recomendado) — Carnes crudo; arroz/pastas cocido" selected>MIXTO (Recomendado) — Carnes en crudo; arroz, pastas y papas en cocido</option>
+                  <option value="Mayormente en CRUDO — Peso todo antes de cocinar">Mayormente en CRUDO — Peso todo antes de cocinar (Máxima precisión)</option>
+                  <option value="Mayormente en COCIDO — Cocino en lote y peso al servir">Mayormente en COCIDO — Cocino en lote para varios días y peso al servir</option>
+                </select>
+                <small class="field-hint">💡 Nota del Coach: Cocinar en lote y pesar cocido es totalmente válido y mejora tu adherencia diaria.</small>
+              </div>
+
+              <!-- ============================================== -->
+              <!-- PREGUNTA CLAVE: DÍAS DE PESAJE EN AYUNAS       -->
+              <!-- ============================================== -->
+              <div class="form-group full-width highlight-group">
+                <label class="highlight-label">
+                  ⚖️ ¿Qué días de la semana te vas a pesar en ayunas? <span class="req">*</span>
+                </label>
+                <p class="highlight-desc">
+                  📍 <strong>Protocolo de Pesaje:</strong> Al despertar, tras orinar/evacuar y antes de ingerir agua o comida. 
+                  Marca los días que acordaste con Piero o selecciona <em>"Todos los días"</em> para máxima precisión.
+                </p>
+                
+                <div class="chips-container days-grid" id="chipsDiasPesaje">
+                  <label class="chip-item day-chip">
+                    <input type="checkbox" name="diasPesaje" value="Lunes" checked>
+                    <span>Lun</span>
+                  </label>
+                  <label class="chip-item day-chip">
+                    <input type="checkbox" name="diasPesaje" value="Martes">
+                    <span>Mar</span>
+                  </label>
+                  <label class="chip-item day-chip">
+                    <input type="checkbox" name="diasPesaje" value="Miércoles" checked>
+                    <span>Mié</span>
+                  </label>
+                  <label class="chip-item day-chip">
+                    <input type="checkbox" name="diasPesaje" value="Jueves">
+                    <span>Jue</span>
+                  </label>
+                  <label class="chip-item day-chip">
+                    <input type="checkbox" name="diasPesaje" value="Viernes" checked>
+                    <span>Vie</span>
+                  </label>
+                  <label class="chip-item day-chip">
+                    <input type="checkbox" name="diasPesaje" value="Sábado">
+                    <span>Sáb</span>
+                  </label>
+                  <label class="chip-item day-chip">
+                    <input type="checkbox" name="diasPesaje" value="Domingo">
+                    <span>Dom</span>
+                  </label>
+                  <label class="chip-item day-chip all-days-chip">
+                    <input type="checkbox" name="diasPesaje" value="Todos los días" id="chkTodosLosDias">
+                    <span>🔥 Todos los días (Ideal para mayor precisión)</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="horarioEntreno">¿A qué hora sueles entrenar habitualmente? <span class="req">*</span></label>
+                <select id="horarioEntreno" name="horarioEntreno" required>
+                  <option value="Mañana (06:00 - 09:00 AM)">Mañana (06:00 - 09:00 AM)</option>
+                  <option value="Media mañana (09:00 - 12:00 PM)">Media mañana (09:00 - 12:00 PM)</option>
+                  <option value="Tarde (02:00 - 06:00 PM)">Tarde (02:00 - 06:00 PM)</option>
+                  <option value="Noche (07:00 PM en adelante)" selected>Noche (07:00 PM en adelante)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="preEntreno">Preferencia antes de entrenar <span class="req">*</span></label>
+                <select id="preEntreno" name="preEntreno" required>
+                  <option value="" disabled selected>Selecciona una opción...</option>
+                  <option value="Comida completa (1 a 2 horas antes)">Comida completa (1 a 2 horas antes)</option>
+                  <option value="Snack ligero (30 a 45 minutos antes)">Snack ligero (30 a 45 minutos antes)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
+                ⬅️ Atrás
+              </button>
+              <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+                Siguiente: Gustos de Alimentos ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- ==================================================== -->
+          <!-- PASO 4: GUSTOS Y PREFERENCIAS ALIMENTARIAS           -->
+          <!-- ==================================================== -->
+          <div class="form-step" id="step-4">
+            <div class="step-header">
+              <span class="step-badge">Paso 4 de 5</span>
+              <h2>Tus Gustos & Preferencias de Alimentos</h2>
+              <p>Definimos lo que disfrutas comer para que tu plan sea 100% sostenible y delicioso.</p>
+            </div>
+
+            <div class="input-grid">
+              <!-- Proteínas -->
+              <div class="form-group full-width">
+                <label>🥩 Proteínas que más disfrutas <span class="req">*</span></label>
+                <small class="field-hint">Marca tus favoritas:</small>
+                <div class="chips-container" id="chipsProteinas">
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Pechuga de pollo" checked><span>Pechuga de pollo</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Pierna/Muslo de pollo"><span>Pierna/Muslo de pollo</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Pavo"><span>Pavo</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Carne de res magra" checked><span>Carne de res magra</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Carne molida magra"><span>Carne molida magra</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Huevos enteros" checked><span>Huevos enteros</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Claras de huevo" checked><span>Claras de huevo</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Atún al agua" checked><span>Atún al agua</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Pescado blanco"><span>Pescado blanco</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Salmón"><span>Salmón</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Mariscos / Langostinos"><span>Mariscos</span></label>
+                  <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Lentejas / Menestras"><span>Lentejas / Menestras</span></label>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="proteinasEvitar">🚫 Proteínas que prefieres EVITAR</label>
+                <input type="text" id="proteinasEvitar" name="proteinasEvitar" placeholder="Carnes o pescados que no toleras (o pon 'Ninguna')">
+              </div>
+
+              <!-- Carbohidratos -->
+              <div class="form-group full-width">
+                <label>🍚 Carbohidratos Favoritos <span class="req">*</span></label>
+                <div class="chips-container" id="chipsCarbos">
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Arroz blanco" checked><span>Arroz blanco</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Arroz integral"><span>Arroz integral</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Papa" checked><span>Papa</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Camote (batata)" checked><span>Camote</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Avena" checked><span>Avena</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Pasta / Fideos" checked><span>Pasta</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Pan de molde"><span>Pan de molde</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Tortillas de maíz/trigo"><span>Tortillas</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Choclo / Maíz"><span>Choclo</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Quinoa"><span>Quinoa</span></label>
+                  <label class="chip-item"><input type="checkbox" name="carbosFav" value="Yuca"><span>Yuca</span></label>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="carbosEvitar">🚫 Carbohidratos que prefieres EVITAR</label>
+                <input type="text" id="carbosEvitar" name="carbosEvitar" placeholder="Carbohidratos que no toleras (o pon 'Ninguno')">
+              </div>
+
+              <!-- Grasas y Lácteos -->
+              <div class="form-group full-width">
+                <label>🥑 Grasas Saludables Favoritas <span class="req">*</span></label>
+                <div class="chips-container" id="chipsGrasas">
+                  <label class="chip-item"><input type="checkbox" name="grasasFav" value="Palta (aguacate)" checked><span>Palta (aguacate)</span></label>
+                  <label class="chip-item"><input type="checkbox" name="grasasFav" value="Aceite de oliva virgen" checked><span>Aceite de oliva</span></label>
+                  <label class="chip-item"><input type="checkbox" name="grasasFav" value="Almendras"><span>Almendras</span></label>
+                  <label class="chip-item"><input type="checkbox" name="grasasFav" value="Nueces"><span>Nueces</span></label>
+                  <label class="chip-item"><input type="checkbox" name="grasasFav" value="Maní"><span>Maní</span></label>
+                  <label class="chip-item"><input type="checkbox" name="grasasFav" value="Mantequilla de maní" checked><span>Mantequilla de maní</span></label>
+                  <label class="chip-item"><input type="checkbox" name="grasasFav" value="Aceitunas"><span>Aceitunas</span></label>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label>🥛 Consumo de Lácteos <span class="req">*</span></label>
+                <small class="field-hint">Selecciona la opción que mejor describe tu consumo habitual:</small>
+                <div class="chips-container" id="chipsLacteos">
+                  <label class="chip-item">
+                    <input type="radio" name="lacteos" value="Leche, queso y yogur con normalidad" checked>
+                    <span>🥛 Con normalidad (leche, queso, yogur)</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="radio" name="lacteos" value="Solo lácteos deslactosados">
+                    <span>🌱 Solo deslactosados</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="radio" name="lacteos" value="Solo Yogur Griego o Queso fresco magro">
+                    <span>🧀 Solo Yogur Griego o Queso magro</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="radio" name="lacteos" value="No consumo ningún tipo de lácteo">
+                    <span>🚫 No consumo ningún lácteo</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Preferencia de Comida Dulce -->
+              <div class="form-group full-width highlight-group">
+                <label class="highlight-label">
+                  🍰 ¿Eres de incluir comidas o preparaciones dulces en tu día a día? <span class="req">*</span>
+                </label>
+                <div class="chips-container" id="chipsGustaDulce" style="margin-top: 8px;">
+                  <label class="chip-item">
+                    <input type="radio" name="gustaDulce" value="Si" checked>
+                    <span>🧁 Sí, me gustan las opciones dulces</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="radio" name="gustaDulce" value="No">
+                    <span>🍳 No, prefiero opciones 100% saladas</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Cantidad de comidas dulces (Condicional si gustaDulce === 'Si') -->
+              <div class="form-group full-width" id="seccionCantidadDulce">
+                <label>¿En cuántas comidas al día te gustaría incluir una preparación dulce? <span class="req">*</span></label>
+                <small class="field-hint">💡 Ejemplos: Bowl de yogur griego con fruta o miel, avena con proteína, pancakes proteicos, tostadas con crema de maní y fruta, etc.</small>
+                <div class="chips-container" id="chipsNumComidasDulces" style="margin-top: 8px;">
+                  <label class="chip-item">
+                    <input type="radio" name="numComidasDulces" value="1 comida dulce al día" checked>
+                    <span>🥣 1 comida dulce al día (ej: Desayuno o Merienda)</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="radio" name="numComidasDulces" value="2 comidas dulces al día (máximo)">
+                    <span>🥞 2 comidas dulces al día (máximo)</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn btn-secondary" onclick="prevStep(4)">
+                ⬅️ Atrás
+              </button>
+              <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+                Siguiente: Toque Final ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- ==================================================== -->
+          <!-- PASO 5: INDISPENSABLES & NOTAS FINALES               -->
+          <!-- ==================================================== -->
+          <div class="form-step" id="step-5">
+            <div class="step-header">
+              <span class="step-badge">Paso 5 de 5</span>
+              <h2>Alimentos Indispensables & Notas</h2>
+              <p>El toque final para que tu Coach adapte las calorías a tu vida real.</p>
+            </div>
+
+            <div class="input-grid">
+              <!-- Porciones de Fruta al Día -->
+              <div class="form-group full-width">
+                <label>🍎 ¿Cuántas unidades de fruta te gustaría incluir al día en tu plan? <span class="req">*</span></label>
+                <small class="field-hint">Dando a entender por unidad (1 unidad = 1 manzana, 1 plátano, 1 naranja, o 1 taza de fresas/arándanos. Mínimo 2, máximo 4):</small>
+                <div class="chips-container" id="chipsPorcionesFruta">
+                  <label class="chip-item">
+                    <input type="radio" name="porcionesFruta" value="2 unidades al día" checked>
+                    <span>🍎 2 unidades al día</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="radio" name="porcionesFruta" value="3 unidades al día">
+                    <span>🍌 3 unidades al día</span>
+                  </label>
+                  <label class="chip-item">
+                    <input type="radio" name="porcionesFruta" value="4 unidades al día (máximo)">
+                    <span>🍓 4 unidades al día (máximo)</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="frutasFav">🍎 Frutas que más disfrutas (Favoritas) <span class="req">*</span></label>
+                <input type="text" id="frutasFav" name="frutasFav" placeholder="Ej: Plátano, fresas, manzana, arándanos, papaya..." required>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="verdurasEvitar">🥦 Verduras que prefieres EVITAR (Opcional)</label>
+                <input type="text" id="verdurasEvitar" name="verdurasEvitar" placeholder="Verduras que prefieres que no aparezcan (o deja vacío si comes de todo)">
+              </div>
+
+              <div class="form-group full-width">
+                <label for="indispensables">⭐ Preparaciones o alimentos indispensables para ti:</label>
+                <textarea id="indispensables" name="indispensables" rows="3" placeholder="Ej: 'Mi café con leche por las mañanas', 'Una tableta o porción de chocolate', 'Mi tostada con queso'..."></textarea>
+                <small class="field-hint">💡 Lo calcularemos en tus calorías para que disfrutes de tu proceso sin frenar tus progresos.</small>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="notas">💬 Cualquier detalle adicional que tu Coach deba saber:</label>
+                <textarea id="notas" name="notas" rows="2" placeholder="Cualquier duda, lesión, contexto o detalle que tu Coach deba saber antes de empezar..."></textarea>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn btn-secondary" onclick="prevStep(5)">
+                ⬅️ Atrás
+              </button>
+              <button type="button" class="btn btn-submit" id="btnSubmit" onclick="submitOnboarding()">
+                🚀 Enviar mi Expediente al Coach
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- PANTALLA DE ÉXITO -->
+        <div class="success-screen" id="successScreen" style="display: none;">
+          <div class="success-icon-wrap">
+            <span class="success-emoji">🎉</span>
+          </div>
+          <h2 class="success-title">¡Expediente Registrado con Éxito!</h2>
+          <p class="success-msg">
+            Tus datos ya fueron sincronizados directamente con el sistema de <strong>PQ Coach Online</strong>.
+            Tu Coach ya tiene tu información para comenzar el diseño de tu plan personalizado.
+          </p>
+
+          <div class="whatsapp-alert-box">
+            <p>📲 <strong>Siguiente paso recomendado:</strong></p>
+            <a href="#" id="btnAvisarWhatsApp" target="_blank" class="btn btn-whatsapp">
+              💬 Avisar a tu Coach por WhatsApp que completé mi cuestionario
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <p>© 2026 PQ Coach Online · Metodología Piero Quintana · Confidencialidad Médica y Deportiva</p>
+      </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
