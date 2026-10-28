@@ -9,8 +9,105 @@ let SPREADSHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzTcYeMO6
 let currentStep = 1;
 const totalSteps = 5;
 
-// Manejo de la selección de "Todos los días"
+// ==========================================
+// AUTOGUARDADO Y RESTAURACIÓN (LocalStorage)
+// ==========================================
+const DRAFT_KEY = 'pq_cuestionario_draft';
+
+function saveDraft() {
+  try {
+    const form = document.getElementById('onboardingForm');
+    if (!form) return;
+    const draft = {
+      values: {},
+      radios: {},
+      checkboxes: {},
+      updatedAt: new Date().toISOString()
+    };
+
+    // Text, number, date, select, textarea
+    form.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]), select, textarea').forEach(el => {
+      if (el.name) {
+        draft.values[el.name] = el.value;
+      }
+    });
+
+    // Radios
+    form.querySelectorAll('input[type="radio"]:checked').forEach(el => {
+      if (el.name) {
+        draft.radios[el.name] = el.value;
+      }
+    });
+
+    // Checkboxes
+    form.querySelectorAll('input[type="checkbox"]').forEach(el => {
+      if (el.name) {
+        if (!draft.checkboxes[el.name]) draft.checkboxes[el.name] = [];
+        if (el.checked) draft.checkboxes[el.name].push(el.value);
+      }
+    });
+
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+  } catch (e) {
+    console.warn("No se pudo autoguardar borrador en localStorage", e);
+  }
+}
+
+function restoreDraft() {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return;
+    const draft = JSON.parse(raw);
+    const form = document.getElementById('onboardingForm');
+    if (!form) return;
+
+    // Restaurar campos de texto, números, fechas, selects y textareas
+    if (draft.values) {
+      Object.keys(draft.values).forEach(name => {
+        const el = form.querySelector(`[name="${name}"]`);
+        if (el && el.type !== 'radio' && el.type !== 'checkbox') {
+          el.value = draft.values[name];
+        }
+      });
+    }
+
+    // Restaurar radios
+    if (draft.radios) {
+      Object.keys(draft.radios).forEach(name => {
+        const val = draft.radios[name];
+        const radio = form.querySelector(`input[name="${name}"][value="${val}"]`);
+        if (radio) {
+          radio.checked = true;
+        }
+      });
+    }
+
+    // Restaurar checkboxes
+    if (draft.checkboxes) {
+      Object.keys(draft.checkboxes).forEach(name => {
+        const checkedList = draft.checkboxes[name] || [];
+        form.querySelectorAll(`input[name="${name}"]`).forEach(cb => {
+          cb.checked = checkedList.includes(cb.value);
+        });
+      });
+    }
+  } catch (e) {
+    console.warn("No se pudo restaurar borrador de localStorage", e);
+  }
+}
+
+// Inicialización de la aplicación
 document.addEventListener('DOMContentLoaded', () => {
+  // 1. Restaurar borrador previo si existe
+  restoreDraft();
+
+  const form = document.getElementById('onboardingForm');
+  if (form) {
+    form.addEventListener('input', saveDraft);
+    form.addEventListener('change', saveDraft);
+  }
+
+  // Manejo de la selección de "Todos los días"
   const chkTodos = document.getElementById('chkTodosLosDias');
   const dayCheckboxes = document.querySelectorAll('input[name="diasPesaje"]:not(#chkTodosLosDias)');
 
@@ -19,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target.checked) {
         dayCheckboxes.forEach(cb => cb.checked = true);
       }
+      saveDraft();
     });
 
     dayCheckboxes.forEach(cb => {
@@ -26,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!cb.checked && chkTodos.checked) {
           chkTodos.checked = false;
         }
+        saveDraft();
       });
     });
   }
@@ -56,7 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.querySelectorAll('input[name="sexo"]').forEach(r => {
-    r.addEventListener('change', toggleCicloMenstrual);
+    r.addEventListener('change', () => {
+      toggleCicloMenstrual();
+      saveDraft();
+    });
   });
   toggleCicloMenstrual();
 
@@ -74,7 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.querySelectorAll('input[name="gustaDulce"]').forEach(r => {
-    r.addEventListener('change', toggleComidaDulce);
+    r.addEventListener('change', () => {
+      toggleComidaDulce();
+      saveDraft();
+    });
   });
   toggleComidaDulce();
 });
@@ -129,7 +234,7 @@ function updateProgress() {
 }
 
 /**
- * Valida que los campos obligatorios del paso actual estén completos
+ * Valida que los campos obligatorios del paso actual estén completos y con valores válidos
  */
 function validateStep(step) {
   const stepContainer = document.getElementById(`step-${step}`);
@@ -154,11 +259,71 @@ function validateStep(step) {
     }
   });
 
+  // Validaciones específicas de Paso 1 (Datos Básicos)
+  if (step === 1) {
+    const sexoChecked = stepContainer.querySelector('input[name="sexo"]:checked');
+    if (!sexoChecked) {
+      alert('⚠️ Por favor selecciona tu Sexo Biológico (Hombre o Mujer).');
+      const radioGrp = stepContainer.querySelector('.radio-toggle-group');
+      if (radioGrp) radioGrp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+
+    const pesoInput = document.getElementById('peso');
+    if (pesoInput) {
+      const pVal = parseFloat(pesoInput.value);
+      if (isNaN(pVal) || pVal < 35 || pVal > 250) {
+        pesoInput.style.borderColor = '#EF4444';
+        alert('⚠️ Por favor ingresa un peso válido entre 35 kg y 250 kg.');
+        pesoInput.focus();
+        return false;
+      }
+    }
+
+    const estInput = document.getElementById('estatura');
+    if (estInput) {
+      const eVal = parseFloat(estInput.value);
+      if (isNaN(eVal) || eVal < 120 || eVal > 230) {
+        estInput.style.borderColor = '#EF4444';
+        alert('⚠️ Por favor ingresa una estatura válida entre 120 cm y 230 cm.');
+        estInput.focus();
+        return false;
+      }
+    }
+  }
+
   // Validación especial para los días de pesaje en Paso 3
   if (step === 3) {
     const pesajeCheckboxes = stepContainer.querySelectorAll('input[name="diasPesaje"]:checked');
     if (pesajeCheckboxes.length === 0) {
       alert('⚠️ Por favor selecciona al menos un día para pesarte en ayunas (o marca "Todos los días").');
+      return false;
+    }
+  }
+
+  // Validación de variedad de alimentos en Paso 4
+  if (step === 4) {
+    const proteinasChecked = stepContainer.querySelectorAll('input[name="proteinasFav"]:checked');
+    if (proteinasChecked.length === 0) {
+      alert('⚠️ Por favor selecciona al menos una proteína favorita para armar tu plan de comidas.');
+      const sec = document.getElementById('chipsProteinas');
+      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+
+    const carbosChecked = stepContainer.querySelectorAll('input[name="carbosFav"]:checked');
+    if (carbosChecked.length === 0) {
+      alert('⚠️ Por favor selecciona al menos un carbohidrato favorito.');
+      const sec = document.getElementById('chipsCarbos');
+      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+
+    const grasasChecked = stepContainer.querySelectorAll('input[name="grasasFav"]:checked');
+    if (grasasChecked.length === 0) {
+      alert('⚠️ Por favor selecciona al menos una fuente de grasas saludables favorita.');
+      const sec = document.getElementById('chipsGrasas');
+      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return false;
     }
   }
@@ -250,7 +415,10 @@ async function submitOnboarding() {
       await new Promise(r => setTimeout(r, 1000));
     }
 
-    // Éxito: Ocultar formulario y mostrar pantalla de celebración
+    // Éxito: Limpiar borrador guardado
+    localStorage.removeItem(DRAFT_KEY);
+
+    // Ocultar formulario y mostrar pantalla de celebración
     form.style.display = 'none';
     const successScreen = document.getElementById('successScreen');
     successScreen.style.display = 'block';
