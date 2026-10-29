@@ -74,7 +74,7 @@ const FOOD_SUGGESTIONS = [
   'Huevos enteros','Claras de huevo','Atún al agua','Pescado blanco','Merluza','Tilapia','Trucha','Salmón','Bonito','Jurel','Pota','Camarones','Langostinos','Mariscos',
   'Lentejas','Garbanzos','Frijoles','Pallares','Arvejas','Habas','Tofu','Tempeh','Proteína whey',
   'Yogur griego','Yogur natural','Queso fresco','Queso cottage','Leche descremada','Leche deslactosada','Kéfir',
-  'Arroz blanco','Arroz integral','Papa','Camote','Yuca','Olluco','Choclo','Quinoa','Avena','Pasta / Fideos','Pan de molde','Pan integral','Pan pita','Tostadas','Tortillas','Galletas de arroz','Cereal integral','Granola',
+  'Arroz blanco','Arroz integral','Papa','Camote','Plátano bellaco','Yuca','Olluco','Choclo','Quinoa','Avena','Pasta / Fideos','Pan de molde','Pan integral','Pan pita','Tostadas','Tortillas','Galletas de arroz','Cereal integral','Granola',
   'Plátano','Manzana','Naranja','Mandarina','Pera','Durazno','Papaya','Piña','Sandía','Melón','Mango','Fresas','Arándanos','Uvas','Kiwi',
   'Palta','Aceite de oliva','Almendras','Nueces','Maní','Mantequilla de maní','Aceitunas','Semillas de chía','Linaza',
   'Brócoli','Espinaca','Zanahoria','Tomate','Pepino','Lechuga','Espárragos','Champiñones','Vainitas','Zapallo','Coliflor','Pimiento','Cebolla'
