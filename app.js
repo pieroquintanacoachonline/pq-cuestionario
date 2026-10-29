@@ -504,6 +504,7 @@ async function submitOnboarding() {
     sintomasLutea: getCheckboxValues('sintomasLutea'),
     energiaFolicular: formData.get('energiaFolicular') || '',
     comidasAlDia: formData.get('comidasAlDia') || '',
+    momentoHambre: formData.get('momentoHambre') || '',
     horarioDesayuno: formData.get('horarioDesayuno') || '',
     horarioAlmuerzo: formData.get('horarioAlmuerzo') || '',
     horarioCena: formData.get('horarioCena') || '',
