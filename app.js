@@ -495,6 +495,7 @@ async function submitOnboarding() {
     estatura: formData.get('estatura') || '',
     whatsapp: formData.get('whatsapp') || '',
     instagram: formData.get('instagram') || '',
+    ocupacion: formData.get('ocupacion') || '',
     alergias: formData.get('alergias') || '',
     digestion: getCheckboxValues('digestion'),
     medicamentos: formData.get('medicamentos') || '',
