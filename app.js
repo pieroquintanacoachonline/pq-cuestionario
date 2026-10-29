@@ -260,6 +260,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sexoRadio && sexoRadio.value === 'Mujer') {
       secCiclo.style.display = 'block';
       if (selRegularidad) selRegularidad.required = true;
+      // Con anticonceptivos o sin periodo activo no se preguntan los síntomas del periodo
+      const grupoSint = document.getElementById('grupoSintomasPeriodo');
+      if (grupoSint) {
+        const v = selRegularidad ? selRegularidad.value : '';
+        grupoSint.style.display = /anticonceptivos|No tengo periodo/i.test(v) ? 'none' : 'block';
+      }
     } else {
       secCiclo.style.display = 'none';
       if (selRegularidad) {
@@ -276,6 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   toggleCicloMenstrual();
+  const selRegCiclo = document.getElementById('regularidadCiclo');
+  if (selRegCiclo) selRegCiclo.addEventListener('change', toggleCicloMenstrual);
 
   // Mostrar / ocultar sección de cantidad de comidas dulces
   function toggleComidaDulce() {

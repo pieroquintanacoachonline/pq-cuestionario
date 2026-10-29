@@ -206,54 +206,33 @@
                   </select>
                 </div>
 
-                <div class="form-group full-width">
-                  <label for="fechaUltimaRegla">📅 ¿Cuándo comenzó aproximadamente tu último periodo? <span class="field-optional">(Opcional)</span></label>
-                  <input type="date" id="fechaUltimaRegla" name="fechaUltimaRegla">
-                  <small class="field-hint">Nos permite estimar en qué fase te encuentras para saber si retienes líquidos o tienes más apetito ciertos días.</small>
-                </div>
-
-                <!-- Sensaciones por Fases Clave -->
-                <div class="form-group full-width">
-                  <label>🌊 En los días previos a tu periodo (Fase Lútea), ¿sueles notar alguno de estos cambios?</label>
-                  <small class="field-hint">Selecciona las que experimentes con frecuencia antes de que te baje:</small>
+                <div class="form-group full-width" id="grupoSintomasPeriodo">
+                  <label>🌸 Durante tu periodo y los días previos, ¿qué sueles notar?</label>
+                  <small class="field-hint">Marca lo que te pase con frecuencia:</small>
                   <div class="chips-container" id="chipsFaseLutea">
                     <label class="chip-item">
-                      <input type="checkbox" name="sintomasLutea" value="Retención de líquidos (1 a 2 kg temporales en báscula)">
-                      <span>💧 Retención de líquidos (1 a 2 kg)</span>
+                      <input type="checkbox" name="sintomasLutea" value="Duermo peor">
+                      <span>😴 Duermo peor</span>
                     </label>
                     <label class="chip-item">
-                      <input type="checkbox" name="sintomasLutea" value="Mayor apetito o antojos de dulces y carbohidratos">
-                      <span>🍫 Mayor apetito o antojos</span>
+                      <input type="checkbox" name="sintomasLutea" value="Más cansancio o bajón de energía">
+                      <span>⚡ Más cansancio</span>
                     </label>
                     <label class="chip-item">
-                      <input type="checkbox" name="sintomasLutea" value="Mayor fatiga, pesadez o bajón de energía">
-                      <span>⚡ Mayor fatiga o cansancio</span>
+                      <input type="checkbox" name="sintomasLutea" value="Más hambre o antojos">
+                      <span>🍫 Más hambre o antojos</span>
                     </label>
                     <label class="chip-item">
-                      <input type="checkbox" name="sintomasLutea" value="Sensación de hinchazón o distensión abdominal">
-                      <span>🎈 Hinchazón o distensión</span>
+                      <input type="checkbox" name="sintomasLutea" value="Molestias o dolor">
+                      <span>🤕 Molestias o dolor</span>
                     </label>
                     <label class="chip-item">
-                      <input type="checkbox" name="sintomasLutea" value="No suelo notar cambios marcados">
-                      <span>✨ Suelo sentirme estable</span>
-                    </label>
-                  </div>
-                </div>
-
-                <div class="form-group full-width">
-                  <label>⚡ En los días posteriores a tu periodo (Fase Folicular), ¿cómo suele ser tu rendimiento?</label>
-                  <div class="chips-container" id="chipsFaseFolicular">
-                    <label class="chip-item">
-                      <input type="radio" name="energiaFolicular" value="Pico notable de energía, fuerza y mejor humor" checked>
-                      <span>🔥 Pico notable de energía y fuerza</span>
+                      <input type="checkbox" name="sintomasLutea" value="Cambios de ánimo">
+                      <span>🎭 Cambios de ánimo</span>
                     </label>
                     <label class="chip-item">
-                      <input type="radio" name="energiaFolicular" value="Energía normal y estable como siempre">
-                      <span>⚡ Energía normal y estable</span>
-                    </label>
-                    <label class="chip-item">
-                      <input type="radio" name="energiaFolicular" value="Me cuesta recuperarme un poco más">
-                      <span>⏳ Recuperación un poco más lenta</span>
+                      <input type="checkbox" name="sintomasLutea" value="Me siento normal, sin cambios marcados">
+                      <span>✨ Me siento normal</span>
                     </label>
                   </div>
                 </div>
