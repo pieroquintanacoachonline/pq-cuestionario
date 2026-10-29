@@ -13,7 +13,7 @@ const totalSteps = 5;
 // AUTOGUARDADO Y RESTAURACIÓN (LocalStorage)
 // ==========================================
 // ===== Ranking de favoritos: el orden en que se tocan los chips es el orden de preferencia =====
-const RANKING_GRUPOS = { proteinasFav: 5, carbosFav: 5, grasasFav: 3 };
+const RANKING_GRUPOS = { proteinasFav: 7, carbosFav: 7, grasasFav: 3 };
 const rankOrder = { proteinasFav: [], carbosFav: [], grasasFav: [] };
 
 function updateRankBadges() {
@@ -561,7 +561,7 @@ async function submitOnboarding() {
     }
 
     // Configurar enlace de WhatsApp directo para el Coach
-    const coachPhone = "51990467554";
+    const coachPhone = "51990601120";
     const cleanNombre = payload.nombre ? payload.nombre.trim() : "";
     const cleanObjetivo = payload.objetivo ? payload.objetivo.trim() : "";
 
