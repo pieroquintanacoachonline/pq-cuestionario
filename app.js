@@ -12,6 +12,115 @@ const totalSteps = 5;
 // ==========================================
 // AUTOGUARDADO Y RESTAURACIÓN (LocalStorage)
 // ==========================================
+// ===== Ranking de favoritos: el orden en que se tocan los chips es el orden de preferencia =====
+const RANKING_GRUPOS = { proteinasFav: 5, carbosFav: 5, grasasFav: 3 };
+const rankOrder = { proteinasFav: [], carbosFav: [], grasasFav: [] };
+
+function updateRankBadges() {
+  Object.keys(RANKING_GRUPOS).forEach(name => {
+    document.querySelectorAll(`input[name="${name}"]`).forEach(cb => {
+      const chip = cb.closest('.chip-item');
+      if (!chip) return;
+      let badge = chip.querySelector('.rank-badge');
+      if (!badge) {
+        badge = document.createElement('b');
+        badge.className = 'rank-badge';
+        chip.appendChild(badge);
+      }
+      const pos = rankOrder[name].indexOf(cb.value);
+      chip.classList.toggle('ranked', pos !== -1);
+      badge.textContent = pos !== -1 ? String(pos + 1) : '';
+    });
+  });
+}
+
+function onRankChange(e) {
+  const cb = e.target;
+  const name = cb.name;
+  if (!RANKING_GRUPOS[name]) return;
+  const lista = rankOrder[name];
+  if (cb.checked) {
+    if (lista.length >= RANKING_GRUPOS[name]) {
+      cb.checked = false;
+      const hint = cb.closest('.form-group') && cb.closest('.form-group').querySelector('.rank-hint');
+      if (hint) { hint.classList.add('rank-hint-alert'); setTimeout(() => hint.classList.remove('rank-hint-alert'), 1600); }
+      return;
+    }
+    if (!lista.includes(cb.value)) lista.push(cb.value);
+  } else {
+    const i = lista.indexOf(cb.value);
+    if (i !== -1) lista.splice(i, 1);
+  }
+  updateRankBadges();
+}
+
+function initRanking() {
+  Object.keys(RANKING_GRUPOS).forEach(name => {
+    // Si había selección sin orden guardado (p. ej. borrador antiguo), se respeta el orden de pantalla
+    const marcados = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(c => c.value);
+    rankOrder[name] = rankOrder[name].filter(v => marcados.includes(v));
+    marcados.forEach(v => { if (!rankOrder[name].includes(v) && rankOrder[name].length < RANKING_GRUPOS[name]) rankOrder[name].push(v); });
+    document.querySelectorAll(`input[name="${name}"]`).forEach(cb => {
+      cb.checked = rankOrder[name].includes(cb.value);
+      cb.addEventListener('change', onRankChange);
+    });
+  });
+  updateRankBadges();
+}
+
+// ===== Buscador de otros alimentos (sugerencias + etiquetas) =====
+const FOOD_SUGGESTIONS = [
+  'Pechuga de pollo','Pierna de pollo','Muslo de pollo','Pavo','Carne de res magra','Carne molida magra','Lomo de res','Lomo de cerdo','Cerdo magro',
+  'Huevos enteros','Claras de huevo','Atún al agua','Pescado blanco','Merluza','Tilapia','Trucha','Salmón','Bonito','Jurel','Pota','Camarones','Langostinos','Mariscos',
+  'Lentejas','Garbanzos','Frijoles','Pallares','Arvejas','Habas','Tofu','Tempeh','Proteína whey',
+  'Yogur griego','Yogur natural','Queso fresco','Queso cottage','Leche descremada','Leche deslactosada','Kéfir',
+  'Arroz blanco','Arroz integral','Papa','Camote','Yuca','Olluco','Choclo','Quinoa','Avena','Pasta / Fideos','Pan de molde','Pan integral','Pan pita','Tostadas','Tortillas','Galletas de arroz','Cereal integral','Granola',
+  'Plátano','Manzana','Naranja','Mandarina','Pera','Durazno','Papaya','Piña','Sandía','Melón','Mango','Fresas','Arándanos','Uvas','Kiwi',
+  'Palta','Aceite de oliva','Almendras','Nueces','Maní','Mantequilla de maní','Aceitunas','Semillas de chía','Linaza',
+  'Brócoli','Espinaca','Zanahoria','Tomate','Pepino','Lechuga','Espárragos','Champiñones','Vainitas','Zapallo','Coliflor','Pimiento','Cebolla'
+];
+
+function initOtrosAlimentos() {
+  const input = document.getElementById('otroAlimentoInput');
+  const hidden = document.getElementById('otrosAlimentos');
+  const tagsEl = document.getElementById('otrosAlimentosTags');
+  const dl = document.getElementById('foodSuggestions');
+  if (!input || !hidden || !tagsEl || !dl) return;
+  dl.innerHTML = FOOD_SUGGESTIONS.map(f => `<option value="${f}"></option>`).join('');
+  let tags = hidden.value ? hidden.value.split(',').map(t => t.trim()).filter(Boolean) : [];
+
+  function sync() {
+    hidden.value = tags.join(', ');
+    tagsEl.innerHTML = '';
+    tags.forEach((t, i) => {
+      const chip = document.createElement('span');
+      chip.className = 'tag-chip';
+      chip.textContent = t + ' ';
+      const x = document.createElement('button');
+      x.type = 'button';
+      x.setAttribute('aria-label', 'Quitar ' + t);
+      x.textContent = '×';
+      x.addEventListener('click', () => { tags.splice(i, 1); sync(); });
+      chip.appendChild(x);
+      tagsEl.appendChild(chip);
+    });
+    hidden.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  function add(valor) {
+    const v = (valor || '').trim().replace(/,/g, ' ');
+    if (!v || tags.length >= 15) return;
+    if (!tags.some(t => t.toLowerCase() === v.toLowerCase())) tags.push(v);
+    input.value = '';
+    sync();
+  }
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); add(input.value); }
+    else if (e.key === 'Backspace' && !input.value && tags.length) { tags.pop(); sync(); }
+  });
+  // Al elegir una sugerencia de la lista el navegador dispara "change"
+  input.addEventListener('change', () => add(input.value));
+  sync();
+}
 const DRAFT_KEY = 'pq_cuestionario_draft';
 
 function saveDraft() {
@@ -46,6 +155,8 @@ function saveDraft() {
         if (el.checked) draft.checkboxes[el.name].push(el.value);
       }
     });
+    Object.keys(RANKING_GRUPOS).forEach(name => { draft.checkboxes[name] = rankOrder[name].slice(); });
+
 
     localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
   } catch (e) {
@@ -90,6 +201,8 @@ function restoreDraft() {
           cb.checked = checkedList.includes(cb.value);
         });
       });
+      Object.keys(RANKING_GRUPOS).forEach(name => { rankOrder[name] = (draft.checkboxes[name] || []).slice(0, RANKING_GRUPOS[name]); });
+
     }
   } catch (e) {
     console.warn("No se pudo restaurar borrador de localStorage", e);
@@ -100,6 +213,8 @@ function restoreDraft() {
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Restaurar borrador previo si existe
   restoreDraft();
+  initRanking();
+  initOtrosAlimentos();
 
   const form = document.getElementById('onboardingForm');
   if (form) {
@@ -353,6 +468,10 @@ async function submitOnboarding() {
   const formData = new FormData(form);
 
   function getCheckboxValues(name) {
+    if (RANKING_GRUPOS[name]) {
+      // Formato "1. Pechuga de pollo, 2. Huevos enteros": el número es la posición en el ranking
+      return rankOrder[name].map((v, i) => (i + 1) + '. ' + v).join(', ');
+    }
     const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
     return Array.from(checked).map(c => c.value).join(', ');
   }
@@ -389,6 +508,7 @@ async function submitOnboarding() {
     carbosFav: getCheckboxValues('carbosFav'),
     carbosEvitar: formData.get('carbosEvitar') || '',
     grasasFav: getCheckboxValues('grasasFav'),
+    otrosAlimentos: formData.get('otrosAlimentos') || '',
     lacteos: formData.get('lacteos') || '',
     gustaDulce: formData.get('gustaDulce') || '',
     numComidasDulces: (formData.get('gustaDulce') === 'Si') ? (formData.get('numComidasDulces') || '1 comida dulce al día') : '0 (Prefiere 100% salado)',

@@ -756,3 +756,70 @@ textarea {
     font-size: 13px;
   }
 }
+
+/* Ranking de favoritos */
+.chip-item { position: relative; }
+.rank-badge {
+  display: none;
+  position: absolute;
+  top: -7px;
+  right: -5px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: #3B82F6;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  box-shadow: 0 0 0 2px var(--bg-dark);
+}
+.chip-item.ranked .rank-badge { display: block; }
+.rank-hint { transition: color 0.2s ease; }
+.rank-hint-alert { color: #FCA5A5; font-weight: 600; }
+
+/* Buscador de otros alimentos */
+.tag-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+}
+.tag-input:focus-within { border-color: #3B82F6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
+.tag-list { display: contents; }
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 6px 5px 11px;
+  background: #1E3A8A;
+  border: 1px solid #60A5FA;
+  border-radius: 999px;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 600;
+}
+.tag-chip button {
+  border: 0;
+  background: transparent;
+  color: #BFDBFE;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+.tag-input input {
+  flex: 1 1 140px;
+  min-width: 120px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-main);
+  font-size: 14px;
+}
