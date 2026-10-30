@@ -12,7 +12,7 @@ https://github.com/pieroquintanacoachonline/pq-cuestionario
 ------------------------------------------------------------------------
 💬 MENSAJE LISTO PARA ENVIAR A TU NUEVO CLIENTE POR WHATSAPP:
 ------------------------------------------------------------------------
-¡Hola! Bienvenido(a) al equipo de PQ Coach Online. Para comenzar con el diseño de tu plan 100% personalizado, por favor completa tu Cuestionario Inicial del Atleta aquí:
+¡Hola! Bienvenido(a) al team de PQ Coach Online. Para comenzar con el diseño de tu plan 100% personalizado, por favor completa tu Cuestionario Inicial del Atleta aquí:
 
 https://pq-cuestionario-web.pieroquintana-coachonline.workers.dev
 
