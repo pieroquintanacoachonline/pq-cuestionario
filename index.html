@@ -290,6 +290,31 @@
                 <small class="field-hint">Con esto Piero reparte tus comidas: más porción donde más hambre tienes y menos donde menos.</small>
               </div>
 
+              <div class="form-group full-width">
+                <label>📊 Tu alimentación actual <small>(opcional: solo si lo sabes)</small></label>
+                <small class="field-hint">Si llevas control de lo que comes, cuéntanos cuántas calorías y macros consumes hoy en día. Si no lo sabes, déjalo en blanco.</small>
+              </div>
+              <div class="form-group">
+                <label for="kcalActual">Calorías al día (kcal)</label>
+                <input type="number" id="kcalActual" name="kcalActual" min="0" max="10000" inputmode="numeric" placeholder="Ej: 2200">
+              </div>
+              <div class="form-group">
+                <label for="protActual">Proteína al día (g)</label>
+                <input type="number" id="protActual" name="protActual" min="0" max="800" inputmode="numeric" placeholder="Ej: 140">
+              </div>
+              <div class="form-group">
+                <label for="carboActual">Carbohidratos al día (g)</label>
+                <input type="number" id="carboActual" name="carboActual" min="0" max="1500" inputmode="numeric" placeholder="Ej: 250">
+              </div>
+              <div class="form-group">
+                <label for="grasaActual">Grasas al día (g)</label>
+                <input type="number" id="grasaActual" name="grasaActual" min="0" max="500" inputmode="numeric" placeholder="Ej: 60">
+              </div>
+              <div class="form-group full-width">
+                <label for="dietaActual">Si no sabes tus calorías, cuéntanos qué comes en un día típico <small>(opcional)</small></label>
+                <textarea id="dietaActual" name="dietaActual" rows="4" placeholder="Ej: Desayuno: 2 huevos + pan. Almuerzo: arroz con pollo. Cena: ..."></textarea>
+              </div>
+
               <div class="form-group">
                 <label for="horarioDesayuno">⏰ Horario habitual de Desayuno <span class="req">*</span></label>
                 <select id="horarioDesayuno" name="horarioDesayuno" required>
