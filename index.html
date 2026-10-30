@@ -275,14 +275,15 @@
 
             <div class="input-grid">
               <div class="form-group full-width">
-                <label for="comidasAlDia">Por tus horarios, ¿cuántas comidas te resulta más cómodo hacer en el día? <span class="req">*</span></label>
-                <select id="comidasAlDia" name="comidasAlDia" required>
-                  <option value="" disabled selected>Selecciona una opción...</option>
-                  <option value="3 comidas">3 comidas</option>
-                  <option value="4 comidas">4 comidas</option>
-                  <option value="5 comidas">5 comidas</option>
-                  <option value="6 comidas">6 comidas</option>
-                </select>
+                <label>🍽️ Tus comidas del día y a qué hora las haces <span class="req">*</span></label>
+                <small class="field-hint">Escribe la hora aproximada de cada comida. Mínimo 3 y máximo 6 comidas. Pon solo las comidas que de verdad te resulta cómodo hacer.</small>
+                <div id="mealsList" class="meals-list"></div>
+                <button type="button" id="btnAddMeal" class="btn-add-meal">➕ Añadir otra comida</button>
+                <input type="hidden" id="comidasAlDia" name="comidasAlDia">
+                <input type="hidden" id="horariosComidas" name="horariosComidas">
+                <input type="hidden" id="horarioDesayuno" name="horarioDesayuno">
+                <input type="hidden" id="horarioAlmuerzo" name="horarioAlmuerzo">
+                <input type="hidden" id="horarioCena" name="horarioCena">
               </div>
 
               <div class="form-group full-width">
@@ -322,38 +323,6 @@
               <div class="form-group full-width">
                 <label for="dietaActual">Si no sabes tus calorías, cuéntanos qué comes en un día típico <small>(opcional)</small></label>
                 <textarea id="dietaActual" name="dietaActual" rows="4" placeholder="Ej: Desayuno: 2 huevos + pan. Almuerzo: arroz con pollo. Cena: ..."></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="horarioDesayuno">⏰ Horario habitual de Desayuno <span class="req">*</span></label>
-                <select id="horarioDesayuno" name="horarioDesayuno" required>
-                  <option value="" disabled selected>Selecciona un rango...</option>
-                  <option value="06:00 AM – 07:00 AM">06:00 AM – 07:00 AM (Madrugador)</option>
-                  <option value="07:00 AM – 08:30 AM">07:00 AM – 08:30 AM (Temprano)</option>
-                  <option value="08:30 AM – 10:00 AM">08:30 AM – 10:00 AM (Estándar)</option>
-                  <option value="10:00 AM – 11:30 AM">10:00 AM – 11:30 AM (Tardío)</option>
-                  <option value="12:00 PM o más tarde">12:00 PM o más tarde (Almuerzo como 1ra ingesta)</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="horarioAlmuerzo">⏰ Horario habitual de Almuerzo <span class="req">*</span></label>
-                <select id="horarioAlmuerzo" name="horarioAlmuerzo" required>
-                  <option value="" disabled selected>Selecciona un rango...</option>
-                  <option value="12:00 PM – 01:00 PM">12:00 PM – 01:00 PM (Temprano)</option>
-                  <option value="01:00 PM – 02:00 PM">01:00 PM – 02:00 PM (Estándar)</option>
-                  <option value="02:00 PM – 03:30 PM">02:00 PM – 03:30 PM (Tardío)</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="horarioCena">⏰ Horario habitual de Cena <span class="req">*</span></label>
-                <select id="horarioCena" name="horarioCena" required>
-                  <option value="" disabled selected>Selecciona un rango...</option>
-                  <option value="07:00 PM – 08:00 PM">07:00 PM – 08:00 PM (Temprano)</option>
-                  <option value="08:00 PM – 09:30 PM">08:00 PM – 09:30 PM (Estándar)</option>
-                  <option value="09:30 PM – 11:00 PM">09:30 PM – 11:00 PM (Nocturno)</option>
-                </select>
               </div>
 
               <div class="form-group">

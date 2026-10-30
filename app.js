@@ -212,7 +212,9 @@ function restoreDraft() {
 // Inicialización de la aplicación
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Restaurar borrador previo si existe
+  initMeals();
   restoreDraft();
+  syncMeals();
   initRanking();
   initOtrosAlimentos();
 
@@ -510,6 +512,7 @@ async function submitOnboarding() {
     carboActual: formData.get('carboActual') || '',
     grasaActual: formData.get('grasaActual') || '',
     dietaActual: formData.get('dietaActual') || '',
+    horariosComidas: formData.get('horariosComidas') || '',
     horarioDesayuno: formData.get('horarioDesayuno') || '',
     horarioAlmuerzo: formData.get('horarioAlmuerzo') || '',
     horarioCena: formData.get('horarioCena') || '',
@@ -588,4 +591,50 @@ async function submitOnboarding() {
     btnSubmit.disabled = false;
     btnSubmit.innerHTML = '🚀 Reintentar Envío';
   }
+}
+
+/* ===== Comidas del día con su hora (mín. 3, máx. 6) ===== */
+const MEALS_MIN = 3, MEALS_MAX = 6;
+function addMealRow(valor) {
+  const list = document.getElementById('mealsList');
+  if (!list) return;
+  const n = list.children.length;
+  if (n >= MEALS_MAX) return;
+  const row = document.createElement('div');
+  row.className = 'meal-row';
+  const lbl = document.createElement('span');
+  lbl.className = 'meal-label';
+  lbl.textContent = 'Comida ' + (n + 1);
+  const inp = document.createElement('input');
+  inp.type = 'time';
+  inp.name = 'mealTime' + n;
+  if (n < MEALS_MIN) inp.required = true;
+  if (valor) inp.value = valor;
+  inp.addEventListener('input', syncMeals);
+  row.appendChild(lbl);
+  row.appendChild(inp);
+  list.appendChild(row);
+  const btn = document.getElementById('btnAddMeal');
+  if (btn) btn.style.display = list.children.length >= MEALS_MAX ? 'none' : '';
+}
+function initMeals() {
+  const list = document.getElementById('mealsList');
+  if (!list) return;
+  for (let i = 0; i < MEALS_MIN; i++) addMealRow();
+  const btn = document.getElementById('btnAddMeal');
+  if (btn) btn.addEventListener('click', () => { addMealRow(); syncMeals(); });
+}
+function syncMeals() {
+  const list = document.getElementById('mealsList');
+  if (!list) return;
+  const horas = Array.from(list.querySelectorAll('input[type="time"]')).map(i => i.value).filter(Boolean).sort();
+  const dec = h => { const [a, b] = h.split(':'); return Number(a) + Number(b) / 60; };
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+  set('comidasAlDia', horas.length ? horas.length + ' comidas' : '');
+  set('horariosComidas', horas.map((h, i) => 'Comida ' + (i + 1) + ': ' + h).join(' · '));
+  set('horarioDesayuno', horas[0] || '');
+  set('horarioCena', horas.length ? horas[horas.length - 1] : '');
+  let alm = horas[0] || '';
+  horas.forEach(h => { if (Math.abs(dec(h) - 13.5) < Math.abs(dec(alm) - 13.5)) alm = h; });
+  set('horarioAlmuerzo', alm);
 }

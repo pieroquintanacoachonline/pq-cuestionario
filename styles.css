@@ -373,6 +373,7 @@ input[type="email"],
 input[type="number"],
 input[type="tel"],
 input[type="date"],
+input[type="time"],
 select,
 textarea {
   width: 100%;
@@ -823,3 +824,11 @@ textarea {
   color: var(--text-main);
   font-size: 14px;
 }
+
+/* Lista de comidas con hora */
+.meals-list { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
+.meal-row { display: flex; align-items: center; gap: 12px; }
+.meal-label { min-width: 92px; font-weight: 600; }
+.meal-row input[type="time"] { flex: 1; max-width: 180px; }
+.btn-add-meal { background: transparent; border: 1px dashed #3B82F6; color: #3B82F6; border-radius: 10px; padding: 10px 16px; font-weight: 600; cursor: pointer; }
+.btn-add-meal:hover { background: rgba(59,130,246,0.08); }
