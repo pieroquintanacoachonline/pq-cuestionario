@@ -615,7 +615,7 @@ function addMealRow(valor) {
   row.appendChild(inp);
   list.appendChild(row);
   const btn = document.getElementById('btnAddMeal');
-  if (btn) btn.style.display = list.children.length >= MEALS_MAX ? 'none' : '';
+  if (btn) { btn.style.display = list.children.length >= MEALS_MAX ? 'none' : ''; btn.textContent = '➕ Añadir comida ' + (list.children.length + 1); }
 }
 function initMeals() {
   const list = document.getElementById('mealsList');
