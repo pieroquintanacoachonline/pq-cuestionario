@@ -124,6 +124,15 @@
 
   window.renderMenuBuilder = async function () {
     const cont = document.getElementById('menuBuilder');
+    // Si el atleta ya contó lo que come en un día típico (recordatorio de 24 h), no armamos menú: basta con gustos y ranking
+    const dieta = (document.getElementById('dietaActual') || {}).value || '';
+    if (dieta.trim().length >= 15) {
+      Object.keys(elegido).forEach(k => delete elegido[k]);
+      try { localStorage.removeItem('pq_menu_cliente'); } catch (e) {}
+      const el = document.getElementById('menuCliente'); if (el) el.value = '';
+      if (cont) cont.innerHTML = '<p class="field-hint">✅ Ya nos contaste lo que comes en un día típico, así que tu coach parte de ahí. No necesitas armar un menú: solo completa tus gustos del paso anterior y las notas de abajo.</p>';
+      return;
+    }
     if (cont) cont.innerHTML = '<p class="field-hint">⏳ Cargando alimentos…</p>';
     await cargarLista();
     pintar();
