@@ -322,6 +322,7 @@ function nextStep(step) {
     currentStep = step + 1;
     document.getElementById(`step-${currentStep}`).classList.add('active');
     updateProgress();
+    if (currentStep === 5 && window.renderMenuBuilder) window.renderMenuBuilder();
     window.scrollTo({ top: 100, behavior: 'smooth' });
   }
 }
@@ -513,6 +514,7 @@ async function submitOnboarding() {
     grasaActual: formData.get('grasaActual') || '',
     dietaActual: formData.get('dietaActual') || '',
     horariosComidas: formData.get('horariosComidas') || '',
+    menuCliente: formData.get('menuCliente') || '',
     horarioDesayuno: formData.get('horarioDesayuno') || '',
     horarioAlmuerzo: formData.get('horarioAlmuerzo') || '',
     horarioCena: formData.get('horarioCena') || '',

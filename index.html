@@ -46,7 +46,7 @@
             <span class="step-pill" data-step="2">2. Salud</span>
             <span class="step-pill" data-step="3">3. Rutina & Pesaje</span>
             <span class="step-pill" data-step="4">4. Gustos</span>
-            <span class="step-pill" data-step="5">5. Finalizar</span>
+            <span class="step-pill" data-step="5">5. Menú & Final</span>
           </div>
         </div>
       </header>
@@ -435,7 +435,7 @@
               <!-- Proteínas -->
               <div class="form-group full-width">
                 <label>🥩 Proteínas que más disfrutas <span class="req">*</span></label>
-                <small class="field-hint rank-hint">Toca en orden de preferencia: la 1.ª es tu favorita (puedes elegir hasta 7).</small>
+                <small class="field-hint rank-hint">Toca en orden de preferencia: la 1.ª es tu favorita. Esto sirve para ofrecerte alternativas e intercambios en tu plan (puedes elegir hasta 7).</small>
                 <div class="chips-container" id="chipsProteinas">
                   <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Pechuga de pollo"><span>Pechuga de pollo</span></label>
                   <label class="chip-item"><input type="checkbox" name="proteinasFav" value="Pierna/Muslo de pollo"><span>Pierna/Muslo de pollo</span></label>
@@ -460,7 +460,7 @@
               <!-- Carbohidratos -->
               <div class="form-group full-width">
                 <label>🍚 Carbohidratos Favoritos <span class="req">*</span></label>
-                <small class="field-hint rank-hint">Toca en orden de preferencia: la 1.ª es tu favorita (puedes elegir hasta 7).</small>
+                <small class="field-hint rank-hint">Toca en orden de preferencia: la 1.ª es tu favorita. Esto sirve para ofrecerte alternativas e intercambios en tu plan (puedes elegir hasta 7).</small>
                 <div class="chips-container" id="chipsCarbos">
                   <label class="chip-item"><input type="checkbox" name="carbosFav" value="Arroz"><span>Arroz</span></label>
                   <label class="chip-item"><input type="checkbox" name="carbosFav" value="Papa"><span>Papa</span></label>
@@ -483,7 +483,7 @@
               <!-- Grasas y Lácteos -->
               <div class="form-group full-width">
                 <label>🥑 Grasas Saludables Favoritas <span class="req">*</span></label>
-                <small class="field-hint rank-hint">Toca en orden de preferencia: la 1.ª es tu favorita (puedes elegir hasta 3).</small>
+                <small class="field-hint rank-hint">Toca en orden de preferencia: la 1.ª es tu favorita. Esto sirve para ofrecerte alternativas e intercambios en tu plan (puedes elegir hasta 3).</small>
                 <div class="chips-container" id="chipsGrasas">
                   <label class="chip-item"><input type="checkbox" name="grasasFav" value="Palta (aguacate)"><span>Palta (aguacate)</span></label>
                   <label class="chip-item"><input type="checkbox" name="grasasFav" value="Aceite de oliva virgen"><span>Aceite de oliva</span></label>
@@ -578,11 +578,18 @@
           <div class="form-step" id="step-5">
             <div class="step-header">
               <span class="step-badge">Paso 5 de 5</span>
-              <h2>Alimentos Indispensables & Notas</h2>
+              <h2>Arma tu Menú, Indispensables & Notas</h2>
               <p>El toque final para que tu Coach adapte las calorías a tu vida real.</p>
             </div>
 
             <div class="input-grid">
+              <!-- Menú armado por el atleta -->
+              <div class="form-group full-width menu-builder-wrap">
+                <label>🍽️ Arma tu menú ideal <small>(opcional, pero muy útil)</small></label>
+                <small class="field-hint">Para cada comida que definiste, elige los alimentos que SÍ te gustaría comer. No escribas cantidades: tu coach las calcula según tus objetivos y tu cuerpo. Si una comida es igual a otra, usa "Copiar elecciones".</small>
+                <div id="menuBuilder"></div>
+                <input type="hidden" id="menuCliente" name="menuCliente">
+              </div>
               <!-- Porciones de Fruta al Día -->
               <div class="form-group full-width">
                 <label>🍎 ¿Cuántas unidades de fruta te gustaría incluir al día en tu plan? <span class="req">*</span></label>
@@ -664,5 +671,6 @@
   </main>
 
   <script src="app.js"></script>
+  <script src="menu-builder.js"></script>
 </body>
 </html>

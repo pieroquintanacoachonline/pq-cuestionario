@@ -832,3 +832,13 @@ textarea {
 .meal-row input[type="time"] { flex: 1; max-width: 180px; }
 .btn-add-meal { background: transparent; border: 1px dashed #3B82F6; color: #3B82F6; border-radius: 10px; padding: 10px 16px; font-weight: 600; cursor: pointer; }
 .btn-add-meal:hover { background: rgba(59,130,246,0.08); }
+
+/* Arma tu menú */
+.menu-builder-wrap { margin-bottom: 18px; }
+.menu-card { border: 1px solid rgba(59,130,246,0.35); border-radius: 14px; padding: 14px; margin: 14px 0; background: rgba(15,23,42,0.35); }
+.menu-card-head { font-size: 1.05rem; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 4px; }
+.menu-tipo { font-size: 0.8rem; padding: 2px 8px; border-radius: 999px; background: rgba(59,130,246,0.2); }
+.menu-count { margin-left: auto; font-size: 0.8rem; opacity: 0.8; }
+.menu-copy { margin: 8px 0; max-width: 320px; }
+.menu-grupo { margin: 8px 0; border-top: 1px dashed rgba(148,163,184,0.3); padding-top: 6px; }
+.menu-grupo summary { cursor: pointer; font-weight: 600; padding: 6px 0; }
