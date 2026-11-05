@@ -128,7 +128,7 @@
               <div class="form-group">
                 <label for="whatsapp">WhatsApp de Contacto <span class="req">*</span></label>
                 <input type="tel" id="whatsapp" name="whatsapp" placeholder="+51 999 999 999" required autocomplete="tel">
-                <small class="field-hint">Aquí recibirás tu plan y seguimiento directo de Piero.</small>
+                <small class="field-hint">Aquí recibirás tu plan y seguimiento directo de tu coach.</small>
               </div>
 
               <div class="form-group">
@@ -296,7 +296,7 @@
                   <option value="Por la noche (7 – 10 pm)">Por la noche (7 – 10 pm)</option>
                   <option value="Muy tarde en la noche (después de las 10 pm)">Muy tarde en la noche (después de las 10 pm)</option>
                 </select>
-                <small class="field-hint">Con esto Piero reparte tus comidas: más porción donde más hambre tienes y menos donde menos.</small>
+                <small class="field-hint">Con esto tu coach reparte tus comidas: más porción donde más hambre tienes y menos donde menos.</small>
               </div>
 
               <div class="form-group full-width">
@@ -352,7 +352,7 @@
                 </label>
                 <p class="highlight-desc">
                   📍 <strong>Protocolo de Pesaje:</strong> Al despertar, tras orinar/evacuar y antes de ingerir agua o comida. 
-                  Marca los días que acordaste con Piero o selecciona <em>"Todos los días"</em> para máxima precisión.
+                  Marca los días que acordaste con tu coach o selecciona <em>"Todos los días"</em> para máxima precisión.
                 </p>
                 
                 <div class="chips-container days-grid" id="chipsDiasPesaje">
@@ -578,18 +578,13 @@
           <div class="form-step" id="step-5">
             <div class="step-header">
               <span class="step-badge">Paso 5 de 5</span>
-              <h2>Arma tu Menú, Indispensables & Notas</h2>
+              <h2>Indispensables & Notas</h2>
               <p>El toque final para que tu Coach adapte las calorías a tu vida real.</p>
             </div>
 
             <div class="input-grid">
-              <!-- Menú armado por el atleta -->
-              <div class="form-group full-width menu-builder-wrap">
-                <label>🍽️ Arma tu menú ideal <small>(opcional, pero muy útil)</small></label>
-                <small class="field-hint">Para cada comida que definiste, elige los alimentos que SÍ te gustaría comer. No escribas cantidades: tu coach las calcula según tus objetivos y tu cuerpo. Si una comida es igual a otra, usa "Copiar elecciones".</small>
-                <div id="menuBuilder"></div>
-                <input type="hidden" id="menuCliente" name="menuCliente">
-              </div>
+              <!-- Menú por comida retirado: tus gustos (paso 4) y lo que quieres evitar bastan; el coach arma el plan -->
+              <input type="hidden" id="menuCliente" name="menuCliente" value="">
               <!-- Porciones de Fruta al Día -->
               <div class="form-group full-width">
                 <label>🍎 ¿Cuántas unidades de fruta te gustaría incluir al día en tu plan? <span class="req">*</span></label>
@@ -671,6 +666,7 @@
   </main>
 
   <script src="app.js"></script>
-  <script src="menu-builder.js"></script>
+  <!-- menu-builder.js ya no se carga (plan simple: gustos + evitar) -->
+
 </body>
 </html>

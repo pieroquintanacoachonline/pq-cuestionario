@@ -589,7 +589,7 @@ async function submitOnboarding() {
 
   } catch (error) {
     console.error("Error al enviar el formulario:", error);
-    alert("Hubo un detalle de conexión, pero tus respuestas han sido guardadas. Por favor avisa a Piero por WhatsApp.");
+    alert("Hubo un detalle de conexión, pero tus respuestas han sido guardadas. Por favor avisa a tu coach por WhatsApp.");
     btnSubmit.disabled = false;
     btnSubmit.innerHTML = '🚀 Reintentar Envío';
   }
