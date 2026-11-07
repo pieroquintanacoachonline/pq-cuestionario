@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "pq-cuestionario",
+  "main": "worker.js",
   "compatibility_date": "2026-10-27",
   "assets": {
     "directory": "."

@@ -118,7 +118,7 @@
       letter-spacing: -0.3px;
     }
 
-    /* VIDEO PLAYER CARD */
+    /* VIDEO PLAYER CARD - ADAPTABLE Y ENCUADRADO */
     .video-card {
       background: #000000;
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -126,24 +126,37 @@
       overflow: hidden;
       box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.85);
       position: relative;
+      width: 100%;
     }
 
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
       background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 240px;
     }
 
-    .video-element, .video-frame {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .video-element {
       width: 100%;
-      height: 100%;
+      height: auto;
+      max-height: 65vh;
+      display: block;
+      object-fit: contain;
+      background: #000000;
+      border-radius: 16px;
+    }
+
+    .video-frame {
+      width: 100%;
+      min-height: 380px;
+      height: 52vh;
       border: none;
       object-fit: contain;
       background: #000000;
+      display: block;
     }
 
     .video-loading {
@@ -302,7 +315,7 @@
           controls 
           playsinline 
           webkit-playsinline 
-          preload="auto"
+          preload="metadata"
           style="display: none;">
         </video>
 
@@ -382,7 +395,7 @@
         console.warn('Usando parámetros de URL directos:', err);
       }
 
-      // 3. Montar video
+      // 3. Montar video optimizado
       setupVideo(currentId);
     }
 
@@ -425,16 +438,27 @@
       const previewFrame = document.getElementById('previewFrame');
       const loading = document.getElementById('videoLoading');
 
-      const streamUrl = `https://drive.usercontent.google.com/download?id=${fileId}&export=download`;
+      // Intentar primero con el endpoint stream directo de Cloudflare (/stream?id=...)
+      // Esto elimina el Content-Disposition: attachment para que iPhone Safari lo reproduzca nativo
+      const streamUrl = `/stream?id=${fileId}`;
       nativePlayer.src = streamUrl;
       nativePlayer.style.display = 'block';
+
+      nativePlayer.onloadedmetadata = () => {
+        loading.style.display = 'none';
+      };
 
       nativePlayer.onloadeddata = () => {
         loading.style.display = 'none';
       };
 
+      nativePlayer.onplay = () => {
+        loading.style.display = 'none';
+      };
+
+      // Fallback si el worker aún no está activo o falla
       nativePlayer.onerror = () => {
-        // Fallback silencioso a iframe si falla el stream directo
+        console.warn('Fallo en /stream nativo, usando Google Drive Preview encuadrado');
         nativePlayer.style.display = 'none';
         previewFrame.src = `https://drive.google.com/file/d/${fileId}/preview`;
         previewFrame.style.display = 'block';
