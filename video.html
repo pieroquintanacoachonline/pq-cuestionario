@@ -167,6 +167,10 @@
       color: var(--pq-cyan);
     }
 
+    .meta-pill.unilateral strong {
+      color: var(--pq-cyan);
+    }
+
     /* VIDEO PLAYER CARD */
     .video-card {
       background: #000000;
@@ -225,7 +229,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* NOTES & CUES GRID / CARDS */
+    /* CARDS CONTAINER */
     .info-grid {
       display: flex;
       flex-direction: column;
@@ -316,7 +320,7 @@
       font-weight: 400;
     }
 
-    /* ACTION BUTTON */
+    /* BOTON VOLVER */
     .actions-box {
       margin-top: 4px;
     }
@@ -352,8 +356,9 @@
       margin-top: 6px;
       font-size: 11px;
       color: var(--text-dim);
-      font-weight: 500;
-      letter-spacing: 0.5px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
     }
   </style>
 </head>
@@ -419,7 +424,7 @@
     <!-- CARDS CONTAINER (NOTAS + CLAVES) -->
     <div class="info-grid">
 
-      <!-- TUS APUNTES / AJUSTE DE MAQUINA (COL C) -->
+      <!-- TUS APUNTES / AJUSTES DE MAQUINA (COL C) -->
       <div class="notes-card" id="notesCard" style="display: none;">
         <div class="card-header">
           <span class="card-icon">📝</span>
@@ -449,7 +454,7 @@
     </div>
 
     <footer class="footer">
-      PQ COACH ONLINE • ALTO RENDIMIENTO & HIPERTROFIA
+      PQ COACH ONLINE • HIPERTROFIA & COMPOSICIÓN CORPORAL
     </footer>
 
   </div>
@@ -468,7 +473,12 @@
     const paramNotas = urlParams.get('notas') || '';
     const paramGrupo = urlParams.get('grupo') || '';
 
+    // Normalizar ID de archivo por si viene URL completa
     currentId = paramId;
+    if (currentId.includes('/d/')) {
+      const match = currentId.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (match) currentId = match[1];
+    }
 
     async function init() {
       // 1. Renderizar inmediato lo que viene en URL (personalizado del atleta)
@@ -483,25 +493,25 @@
         document.getElementById('cuesText').textContent = paramClaves;
       }
 
-      // Procesar Notas / Apuntes personales (Columna C)
+      // Procesar Notas / Apuntes personales de máquina (Columna C)
       if (paramNotas && paramNotas.trim() !== '') {
         document.getElementById('notesText').textContent = paramNotas.trim();
         document.getElementById('notesCard').style.display = 'block';
       }
 
-      // Detección inteligente de Superserie (si notas o nombre contienen SS o superserie)
+      // Detección inteligente de Superserie (en notas o nombre)
       const fullText = `${paramNombre} ${paramNotas}`.toLowerCase();
       if (fullText.includes('ss') || fullText.includes('superserie') || fullText.includes('super serie') || fullText.includes('a1') || fullText.includes('a2')) {
         document.getElementById('ssBadge').style.display = 'inline-flex';
       }
 
-      // Formatear Reps
+      // Formatear Reps (con prioridad manual y soporte unilateral)
       formatReps(paramReps);
 
-      // Formatear Descanso
+      // Formatear Descanso (con prioridad manual y soporte unilateral 1/2)
       formatDesc(paramDesc);
 
-      // 2. Cargar ejercicios.json para completar datos que falten (grupo muscular o claves si vinieron vacías)
+      // 2. Cargar ejercicios.json para autocompletar si falta grupo muscular o claves
       try {
         const resp = await fetch('ejercicios.json');
         if (resp.ok) {
@@ -526,12 +536,12 @@
       if (clean.startsWith('1/') || clean.toLowerCase().includes('1 por lado')) {
         const part = clean.replace(/^1\//, '').trim();
         repsTag.className = 'meta-pill unilateral';
-        repsText.textContent = `1 por lado x ${part} reps`;
+        repsText.innerHTML = `<strong>1 por lado</strong> x ${part} reps`;
         repsTag.style.display = 'inline-flex';
       } else {
         repsTag.className = 'meta-pill';
         const suffix = clean.toLowerCase().includes('rep') ? '' : ' reps';
-        repsText.textContent = `${clean}${suffix}`;
+        repsText.innerHTML = `<strong>${clean}</strong>${suffix}`;
         repsTag.style.display = 'inline-flex';
       }
     }
@@ -542,12 +552,27 @@
       const descTag = document.getElementById('descTag');
       const descText = document.getElementById('descText');
 
-      // Si es solo un número (ej: "2", "3", "1.5", "0.5")
-      if (/^\d+(\.\d+)?$/.test(clean)) {
-        descText.textContent = `${clean} min`;
+      // Si es descanso unilateral (ej: "1/2" -> 1 min entre lados / 2 min entre series)
+      if (clean.includes('/')) {
+        const parts = clean.split('/');
+        let entreLados = parts[0].trim();
+        let entreSeries = parts[1].trim();
+
+        if (/^\d+(\.\d+)?$/.test(entreLados)) entreLados += ' min';
+        if (/^\d+(\.\d+)?$/.test(entreSeries)) entreSeries += ' min';
+
+        descTag.className = 'meta-pill unilateral';
+        descText.innerHTML = `<strong>${entreLados}</strong> e/lados • <strong>${entreSeries}</strong> e/series`;
+        descTag.style.display = 'inline-flex';
+      } else if (/^\d+(\.\d+)?$/.test(clean)) {
+        // Si el coach escribió solo un número (ej: "2", "3", "1.5")
+        descTag.className = 'meta-pill';
+        descText.innerHTML = `<strong>${clean} min</strong>`;
         descTag.style.display = 'inline-flex';
       } else {
-        descText.textContent = clean;
+        // Texto libre (ej: "90s", "1-2 min")
+        descTag.className = 'meta-pill';
+        descText.innerHTML = `<strong>${clean}</strong>`;
         descTag.style.display = 'inline-flex';
       }
     }
@@ -607,7 +632,7 @@
       };
 
       nativePlayer.onerror = () => {
-        // Fallback silencioso a iframe sin alertar al usuario
+        // Fallback silencioso a iframe si falla el stream directo
         nativePlayer.style.display = 'none';
         previewFrame.src = `https://drive.google.com/file/d/${fileId}/preview`;
         previewFrame.style.display = 'block';
