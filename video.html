@@ -18,9 +18,9 @@
       --pq-cyan: #00F0FF;
       --pq-gold: #F59E0B;
       --pq-emerald: #10B981;
-      --bg-dark: #080D1A;
-      --card-bg: rgba(15, 23, 42, 0.92);
-      --card-border: rgba(59, 130, 246, 0.25);
+      --bg-dark: #070B14;
+      --card-bg: rgba(15, 23, 42, 0.94);
+      --card-border: rgba(59, 130, 246, 0.22);
       --text-main: #F8FAFC;
       --text-muted: #94A3B8;
       --text-dim: #64748B;
@@ -36,15 +36,15 @@
     body {
       background: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.15), transparent 45%),
-        radial-gradient(circle at 10% 100%, rgba(0, 40, 117, 0.2), transparent 40%);
+        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.18), transparent 50%),
+        radial-gradient(circle at 10% 100%, rgba(0, 40, 117, 0.22), transparent 45%);
       color: var(--text-main);
       font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 16px 14px 40px;
+      padding: 14px 14px 30px;
     }
 
     .container {
@@ -52,7 +52,7 @@
       max-width: 580px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     /* HEADER */
@@ -60,7 +60,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 6px 4px;
+      padding: 4px 2px;
     }
 
     .logo-box {
@@ -71,20 +71,23 @@
     }
 
     .logo-img {
-      height: 38px;
+      height: 36px;
       width: auto;
       object-fit: contain;
     }
 
-    .badge-muscle {
+    .badges-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;
+      padding: 5px 11px;
       border-radius: 9999px;
-      background: rgba(37, 99, 235, 0.15);
-      border: 1px solid rgba(0, 240, 255, 0.4);
-      color: var(--pq-cyan);
       font-family: 'Archivo', sans-serif;
       font-size: 11px;
       font-weight: 800;
@@ -92,12 +95,25 @@
       text-transform: uppercase;
     }
 
+    .badge-muscle {
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: var(--pq-cyan);
+    }
+
+    .badge-ss {
+      background: rgba(245, 158, 11, 0.18);
+      border: 1px solid rgba(245, 158, 11, 0.6);
+      color: var(--pq-gold);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+    }
+
     .badge-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--pq-cyan);
-      box-shadow: 0 0 8px var(--pq-cyan);
+      background: currentColor;
+      box-shadow: 0 0 6px currentColor;
     }
 
     /* EXERCISE TITLE CARD */
@@ -106,13 +122,13 @@
       border: 1px solid var(--card-border);
       border-radius: 18px;
       padding: 16px 18px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
     }
 
     .exercise-title {
       font-family: 'Archivo', sans-serif;
-      font-size: 22px;
+      font-size: 23px;
       font-weight: 800;
       line-height: 1.25;
       color: #FFFFFF;
@@ -127,29 +143,37 @@
       margin-top: 6px;
     }
 
-    .meta-tag {
+    .meta-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 12px;
+      gap: 6px;
+      font-size: 12.5px;
       font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
     }
 
-    .meta-tag strong {
+    .meta-pill strong {
       color: #FFFFFF;
+      font-weight: 700;
+    }
+
+    .meta-pill.unilateral {
+      background: rgba(0, 240, 255, 0.1);
+      border-color: rgba(0, 240, 255, 0.35);
+      color: var(--pq-cyan);
     }
 
     /* VIDEO PLAYER CARD */
     .video-card {
       background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.85);
       position: relative;
     }
 
@@ -186,12 +210,11 @@
       color: var(--text-muted);
       font-size: 13px;
       z-index: 2;
-      transition: opacity 0.3s ease;
     }
 
     .spinner {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border: 3px solid rgba(0, 240, 255, 0.2);
       border-top-color: var(--pq-cyan);
       border-radius: 50%;
@@ -202,13 +225,72 @@
       to { transform: rotate(360deg); }
     }
 
+    /* NOTES & CUES GRID / CARDS */
+    .info-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* TUS APUNTES CARD */
+    .notes-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: 0 8px 24px -6px rgba(0, 240, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .notes-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--pq-cyan), var(--pq-electric));
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .notes-title {
+      color: var(--pq-cyan);
+    }
+
+    .notes-content {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
     /* CLAVES TECNICAS CARD */
     .cues-card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.7));
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: 18px;
-      padding: 18px 20px;
-      box-shadow: 0 10px 25px -8px rgba(245, 158, 11, 0.15);
+      background: linear-gradient(145deg, rgba(20, 28, 48, 0.95), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 8px 24px -6px rgba(245, 158, 11, 0.12);
       position: relative;
       overflow: hidden;
     }
@@ -220,28 +302,11 @@
       left: 0;
       width: 4px;
       height: 100%;
-      background: linear-gradient(to bottom, var(--pq-gold), var(--pq-cyan));
-    }
-
-    .cues-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .cues-icon {
-      font-size: 20px;
-      line-height: 1;
+      background: linear-gradient(to bottom, var(--pq-gold), #EF4444);
     }
 
     .cues-title {
-      font-family: 'Archivo', sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 0.6px;
       color: var(--pq-gold);
-      text-transform: uppercase;
     }
 
     .cues-content {
@@ -251,57 +316,40 @@
       font-weight: 400;
     }
 
-    /* ACTION BUTTONS */
-    .actions-row {
-      display: flex;
-      gap: 10px;
+    /* ACTION BUTTON */
+    .actions-box {
       margin-top: 4px;
     }
 
-    .btn {
-      flex: 1;
+    .btn-return {
+      width: 100%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 13px 18px;
+      padding: 14px 20px;
       border-radius: 14px;
       font-family: 'Archivo', sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.3px;
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.2s ease;
-      border: none;
-    }
-
-    .btn-secondary {
       background: rgba(255, 255, 255, 0.06);
       color: var(--text-main);
       border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.2s ease;
     }
 
-    .btn-secondary:active {
+    .btn-return:active {
       transform: scale(0.98);
       background: rgba(255, 255, 255, 0.1);
-    }
-
-    .btn-drive {
-      background: rgba(37, 99, 235, 0.15);
-      color: #60A5FA;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-
-    .btn-drive:active {
-      transform: scale(0.98);
-      background: rgba(37, 99, 235, 0.25);
     }
 
     /* FOOTER */
     .footer {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 6px;
       font-size: 11px;
       color: var(--text-dim);
       font-weight: 500;
@@ -318,9 +366,15 @@
       <a href="#" class="logo-box">
         <img src="logo.png" alt="PQ Coach" class="logo-img" onerror="this.style.display='none'">
       </a>
-      <div class="badge-muscle" id="muscleBadge">
-        <span class="badge-dot"></span>
-        <span id="muscleText">EJERCICIO</span>
+      <div class="badges-group">
+        <div class="badge badge-ss" id="ssBadge" style="display: none;">
+          <span>⚡</span>
+          <span>SUPERSERIE</span>
+        </div>
+        <div class="badge badge-muscle" id="muscleBadge">
+          <span class="badge-dot"></span>
+          <span id="muscleText">EJERCICIO</span>
+        </div>
       </div>
     </header>
 
@@ -328,9 +382,8 @@
     <div class="title-card">
       <h1 class="exercise-title" id="exerciseName">Cargando ejercicio...</h1>
       <div class="meta-row" id="metaRow">
-        <span class="meta-tag" id="repsTag" style="display: none;">🎯 Reps: <strong id="repsText">-</strong></span>
-        <span class="meta-tag" id="descTag" style="display: none;">⏱️ Descanso: <strong id="descText">-</strong></span>
-        <span class="meta-tag" id="secTag" style="display: none;">🔗 Sinergista: <strong id="secText">-</strong></span>
+        <span class="meta-pill" id="repsTag" style="display: none;">🎯 <strong id="repsText">-</strong></span>
+        <span class="meta-pill" id="descTag" style="display: none;">⏱️ <strong id="descText">-</strong></span>
       </div>
     </div>
 
@@ -353,7 +406,7 @@
           style="display: none;">
         </video>
 
-        <!-- Fallback Iframe (Preview) -->
+        <!-- Fallback Iframe -->
         <iframe 
           id="previewFrame" 
           class="video-frame" 
@@ -363,25 +416,36 @@
       </div>
     </div>
 
-    <!-- CLAVES TECNICAS CARD -->
-    <div class="cues-card" id="cuesCard">
-      <div class="cues-header">
-        <span class="cues-icon">💡</span>
-        <span class="cues-title">Claves Técnicas de Ejecución</span>
+    <!-- CARDS CONTAINER (NOTAS + CLAVES) -->
+    <div class="info-grid">
+
+      <!-- TUS APUNTES / AJUSTE DE MAQUINA (COL C) -->
+      <div class="notes-card" id="notesCard" style="display: none;">
+        <div class="card-header">
+          <span class="card-icon">📝</span>
+          <span class="card-title notes-title">Tus Apuntes / Ajustes de Máquina</span>
+        </div>
+        <div class="notes-content" id="notesText"></div>
       </div>
-      <div class="cues-content" id="cuesText">
-        Cargando indicaciones técnicas del coach...
+
+      <!-- CLAVES TECNICAS DE EJECUCION (COL E) -->
+      <div class="cues-card" id="cuesCard">
+        <div class="card-header">
+          <span class="card-icon">💡</span>
+          <span class="card-title cues-title">Claves Técnicas de Ejecución</span>
+        </div>
+        <div class="cues-content" id="cuesText">
+          Cargando indicaciones técnicas del coach...
+        </div>
       </div>
+
     </div>
 
-    <!-- ACTION BUTTONS -->
-    <div class="actions-row">
-      <button class="btn btn-secondary" onclick="togglePlayerMode()" id="btnToggle">
-        🔁 Alternar Reproductor
+    <!-- BOTON VOLVER -->
+    <div class="actions-box">
+      <button class="btn-return" onclick="handleReturn()">
+        ← Volver a mi entrenamiento
       </button>
-      <a href="#" target="_blank" class="btn btn-drive" id="btnDrive">
-        ↗️ Abrir en Drive
-      </a>
     </div>
 
     <footer class="footer">
@@ -393,20 +457,21 @@
   <script>
     let dbData = null;
     let currentId = '';
-    let isIframeMode = false;
 
     // Obtener parámetros de URL
     const urlParams = new URLSearchParams(window.location.search);
     const paramId = urlParams.get('id') || '';
     const paramNombre = urlParams.get('nombre') || '';
+    const paramReps = urlParams.get('reps') || '';
+    const paramDesc = urlParams.get('desc') || '';
     const paramClaves = urlParams.get('claves') || '';
+    const paramNotas = urlParams.get('notas') || '';
     const paramGrupo = urlParams.get('grupo') || '';
 
     currentId = paramId;
 
-    // Inicializar carga de base de datos
     async function init() {
-      // 1. Mostrar lo que vino en URL de inmediato si existe
+      // 1. Renderizar inmediato lo que viene en URL (personalizado del atleta)
       if (paramNombre) {
         document.getElementById('exerciseName').textContent = paramNombre;
         document.title = `${paramNombre} • PQ Coach`;
@@ -418,22 +483,76 @@
         document.getElementById('cuesText').textContent = paramClaves;
       }
 
-      // 2. Cargar ejercicios.json
+      // Procesar Notas / Apuntes personales (Columna C)
+      if (paramNotas && paramNotas.trim() !== '') {
+        document.getElementById('notesText').textContent = paramNotas.trim();
+        document.getElementById('notesCard').style.display = 'block';
+      }
+
+      // Detección inteligente de Superserie (si notas o nombre contienen SS o superserie)
+      const fullText = `${paramNombre} ${paramNotas}`.toLowerCase();
+      if (fullText.includes('ss') || fullText.includes('superserie') || fullText.includes('super serie') || fullText.includes('a1') || fullText.includes('a2')) {
+        document.getElementById('ssBadge').style.display = 'inline-flex';
+      }
+
+      // Formatear Reps
+      formatReps(paramReps);
+
+      // Formatear Descanso
+      formatDesc(paramDesc);
+
+      // 2. Cargar ejercicios.json para completar datos que falten (grupo muscular o claves si vinieron vacías)
       try {
         const resp = await fetch('ejercicios.json');
         if (resp.ok) {
           dbData = await resp.json();
-          lookupExercise();
+          completeFromDatabase();
         }
       } catch (err) {
-        console.warn('No se pudo cargar ejercicios.json local, usando parámetros de URL:', err);
+        console.warn('Usando parámetros de URL directos:', err);
       }
 
       // 3. Montar video
       setupVideo(currentId);
     }
 
-    function lookupExercise() {
+    function formatReps(val) {
+      if (!val || val.trim() === '') return;
+      const clean = val.trim();
+      const repsTag = document.getElementById('repsTag');
+      const repsText = document.getElementById('repsText');
+
+      // Si es formato unilateral (ej: "1/10", "1/12", "1/10-12")
+      if (clean.startsWith('1/') || clean.toLowerCase().includes('1 por lado')) {
+        const part = clean.replace(/^1\//, '').trim();
+        repsTag.className = 'meta-pill unilateral';
+        repsText.textContent = `1 por lado x ${part} reps`;
+        repsTag.style.display = 'inline-flex';
+      } else {
+        repsTag.className = 'meta-pill';
+        const suffix = clean.toLowerCase().includes('rep') ? '' : ' reps';
+        repsText.textContent = `${clean}${suffix}`;
+        repsTag.style.display = 'inline-flex';
+      }
+    }
+
+    function formatDesc(val) {
+      if (!val || val.trim() === '') return;
+      const clean = val.trim();
+      const descTag = document.getElementById('descTag');
+      const descText = document.getElementById('descText');
+
+      // Si es solo un número (ej: "2", "3", "1.5", "0.5")
+      if (/^\d+(\.\d+)?$/.test(clean)) {
+        descText.textContent = `${clean} min`;
+        descTag.style.display = 'inline-flex';
+      } else {
+        descText.textContent = clean;
+        descTag.style.display = 'inline-flex';
+      }
+    }
+
+    function completeFromDatabase() {
       if (!dbData) return;
       
       let ex = null;
@@ -448,30 +567,23 @@
       }
 
       if (ex) {
-        document.getElementById('exerciseName').textContent = ex.nombre;
-        document.title = `${ex.nombre} • PQ Coach`;
-        
-        if (ex.grupo) {
+        if (!paramNombre) {
+          document.getElementById('exerciseName').textContent = ex.nombre;
+          document.title = `${ex.nombre} • PQ Coach`;
+        }
+        if (!paramGrupo && ex.grupo) {
           document.getElementById('muscleText').textContent = ex.grupo;
         }
-        if (ex.claves) {
+        // Solo usar claves de BD si en la fila de la hoja vinieron vacías
+        if (!paramClaves && ex.claves) {
           document.getElementById('cuesText').textContent = ex.claves;
-        } else {
-          document.getElementById('cuesText').textContent = 'Sigue las pautas de cadencia, rango de recorrido y RIR indicadas por tu coach.';
         }
-
-        // Metas
-        if (ex.reps) {
-          document.getElementById('repsText').textContent = ex.reps;
-          document.getElementById('repsTag').style.display = 'inline-flex';
+        // Solo usar reps/desc de BD si en la fila vinieron vacíos
+        if (!paramReps && ex.reps) {
+          formatReps(ex.reps);
         }
-        if (ex.desc) {
-          document.getElementById('descText').textContent = ex.desc;
-          document.getElementById('descTag').style.display = 'inline-flex';
-        }
-        if (ex.secundario) {
-          document.getElementById('secText').textContent = ex.secundario;
-          document.getElementById('secTag').style.display = 'inline-flex';
+        if (!paramDesc && ex.desc) {
+          formatDesc(ex.desc);
         }
       }
     }
@@ -485,12 +597,7 @@
       const nativePlayer = document.getElementById('nativePlayer');
       const previewFrame = document.getElementById('previewFrame');
       const loading = document.getElementById('videoLoading');
-      const btnDrive = document.getElementById('btnDrive');
 
-      // Botón enlace a Drive
-      btnDrive.href = `https://drive.google.com/file/d/${fileId}/view`;
-
-      // Intentar primero con el reproductor HTML5 nativo usando stream directo
       const streamUrl = `https://drive.usercontent.google.com/download?id=${fileId}&export=download`;
       nativePlayer.src = streamUrl;
       nativePlayer.style.display = 'block';
@@ -500,45 +607,25 @@
       };
 
       nativePlayer.onerror = () => {
-        console.warn('Error en reproductor nativo, alternando a Iframe Preview...');
-        switchToIframe(fileId);
+        // Fallback silencioso a iframe sin alertar al usuario
+        nativePlayer.style.display = 'none';
+        previewFrame.src = `https://drive.google.com/file/d/${fileId}/preview`;
+        previewFrame.style.display = 'block';
+        previewFrame.onload = () => {
+          loading.style.display = 'none';
+        };
       };
 
-      // Si después de 4 segundos no carga el nativo, preparar opción de iframe
       setTimeout(() => {
-        if (nativePlayer.readyState < 2 && !isIframeMode) {
-          console.log('Stream nativo tomando tiempo, manteniendo controles...');
-          loading.style.display = 'none';
-        }
+        loading.style.display = 'none';
       }, 3500);
     }
 
-    function switchToIframe(fileId) {
-      isIframeMode = true;
-      const nativePlayer = document.getElementById('nativePlayer');
-      const previewFrame = document.getElementById('previewFrame');
-      const loading = document.getElementById('videoLoading');
-
-      nativePlayer.pause();
-      nativePlayer.style.display = 'none';
-
-      previewFrame.src = `https://drive.google.com/file/d/${fileId}/preview`;
-      previewFrame.style.display = 'block';
-      previewFrame.onload = () => {
-        loading.style.display = 'none';
-      };
-    }
-
-    function togglePlayerMode() {
-      if (isIframeMode) {
-        // Volver a nativo
-        isIframeMode = false;
-        document.getElementById('previewFrame').style.display = 'none';
-        const native = document.getElementById('nativePlayer');
-        native.style.display = 'block';
-        native.play().catch(() => {});
+    function handleReturn() {
+      if (window.history.length > 1) {
+        window.history.back();
       } else {
-        switchToIframe(currentId);
+        window.close();
       }
     }
 
