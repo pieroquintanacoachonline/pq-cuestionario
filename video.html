@@ -8,7 +8,7 @@
   <!-- Tipografía Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -17,7 +17,6 @@
       --pq-electric: #2563EB;
       --pq-cyan: #00F0FF;
       --pq-gold: #F59E0B;
-      --pq-emerald: #10B981;
       --bg-dark: #070B14;
       --card-bg: rgba(15, 23, 42, 0.94);
       --card-border: rgba(59, 130, 246, 0.22);
@@ -76,18 +75,15 @@
       object-fit: contain;
     }
 
-    .badges-group {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .badge {
+    .badge-muscle {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 11px;
+      padding: 5px 12px;
       border-radius: 9999px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: var(--pq-cyan);
       font-family: 'Archivo', sans-serif;
       font-size: 11px;
       font-weight: 800;
@@ -95,25 +91,12 @@
       text-transform: uppercase;
     }
 
-    .badge-muscle {
-      background: rgba(37, 99, 235, 0.15);
-      border: 1px solid rgba(0, 240, 255, 0.4);
-      color: var(--pq-cyan);
-    }
-
-    .badge-ss {
-      background: rgba(245, 158, 11, 0.18);
-      border: 1px solid rgba(245, 158, 11, 0.6);
-      color: var(--pq-gold);
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
-    }
-
     .badge-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: currentColor;
-      box-shadow: 0 0 6px currentColor;
+      background: var(--pq-cyan);
+      box-shadow: 0 0 6px var(--pq-cyan);
     }
 
     /* EXERCISE TITLE CARD */
@@ -128,47 +111,11 @@
 
     .exercise-title {
       font-family: 'Archivo', sans-serif;
-      font-size: 23px;
+      font-size: 22px;
       font-weight: 800;
       line-height: 1.25;
       color: #FFFFFF;
-      margin-bottom: 8px;
       letter-spacing: -0.3px;
-    }
-
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .meta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12.5px;
-      font-weight: 600;
-      padding: 5px 12px;
-      border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-main);
-    }
-
-    .meta-pill strong {
-      color: #FFFFFF;
-      font-weight: 700;
-    }
-
-    .meta-pill.unilateral {
-      background: rgba(0, 240, 255, 0.1);
-      border-color: rgba(0, 240, 255, 0.35);
-      color: var(--pq-cyan);
-    }
-
-    .meta-pill.unilateral strong {
-      color: var(--pq-cyan);
     }
 
     /* VIDEO PLAYER CARD */
@@ -229,65 +176,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* CARDS CONTAINER */
-    .info-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    /* TUS APUNTES CARD */
-    .notes-card {
-      background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-      border: 1px solid rgba(0, 240, 255, 0.35);
-      border-radius: 16px;
-      padding: 14px 18px;
-      box-shadow: 0 8px 24px -6px rgba(0, 240, 255, 0.12);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .notes-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(to bottom, var(--pq-cyan), var(--pq-electric));
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .card-icon {
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .card-title {
-      font-family: 'Archivo', sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-    }
-
-    .notes-title {
-      color: var(--pq-cyan);
-    }
-
-    .notes-content {
-      font-size: 15px;
-      line-height: 1.5;
-      color: #FFFFFF;
-      font-weight: 600;
-    }
-
     /* CLAVES TECNICAS CARD */
     .cues-card {
       background: linear-gradient(145deg, rgba(20, 28, 48, 0.95), rgba(15, 23, 42, 0.95));
@@ -309,7 +197,24 @@
       background: linear-gradient(to bottom, var(--pq-gold), #EF4444);
     }
 
-    .cues-title {
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
       color: var(--pq-gold);
     }
 
@@ -371,25 +276,15 @@
       <a href="#" class="logo-box">
         <img src="logo.png" alt="PQ Coach" class="logo-img" onerror="this.style.display='none'">
       </a>
-      <div class="badges-group">
-        <div class="badge badge-ss" id="ssBadge" style="display: none;">
-          <span>⚡</span>
-          <span>SUPERSERIE</span>
-        </div>
-        <div class="badge badge-muscle" id="muscleBadge">
-          <span class="badge-dot"></span>
-          <span id="muscleText">EJERCICIO</span>
-        </div>
+      <div class="badge-muscle" id="muscleBadge">
+        <span class="badge-dot"></span>
+        <span id="muscleText">EJERCICIO</span>
       </div>
     </header>
 
     <!-- TITLE CARD -->
     <div class="title-card">
       <h1 class="exercise-title" id="exerciseName">Cargando ejercicio...</h1>
-      <div class="meta-row" id="metaRow">
-        <span class="meta-pill" id="repsTag" style="display: none;">🎯 <strong id="repsText">-</strong></span>
-        <span class="meta-pill" id="descTag" style="display: none;">⏱️ <strong id="descText">-</strong></span>
-      </div>
     </div>
 
     <!-- VIDEO CARD -->
@@ -421,29 +316,15 @@
       </div>
     </div>
 
-    <!-- CARDS CONTAINER (NOTAS + CLAVES) -->
-    <div class="info-grid">
-
-      <!-- TUS APUNTES / AJUSTES DE MAQUINA (COL C) -->
-      <div class="notes-card" id="notesCard" style="display: none;">
-        <div class="card-header">
-          <span class="card-icon">📝</span>
-          <span class="card-title notes-title">Tus Apuntes / Ajustes de Máquina</span>
-        </div>
-        <div class="notes-content" id="notesText"></div>
+    <!-- CLAVES TECNICAS DE EJECUCION -->
+    <div class="cues-card" id="cuesCard">
+      <div class="card-header">
+        <span class="card-icon">💡</span>
+        <span class="card-title">Claves Técnicas de Ejecución</span>
       </div>
-
-      <!-- CLAVES TECNICAS DE EJECUCION (COL E) -->
-      <div class="cues-card" id="cuesCard">
-        <div class="card-header">
-          <span class="card-icon">💡</span>
-          <span class="card-title cues-title">Claves Técnicas de Ejecución</span>
-        </div>
-        <div class="cues-content" id="cuesText">
-          Cargando indicaciones técnicas del coach...
-        </div>
+      <div class="cues-content" id="cuesText">
+        Cargando indicaciones técnicas del coach...
       </div>
-
     </div>
 
     <!-- BOTON VOLVER -->
@@ -467,10 +348,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const paramId = urlParams.get('id') || '';
     const paramNombre = urlParams.get('nombre') || '';
-    const paramReps = urlParams.get('reps') || '';
-    const paramDesc = urlParams.get('desc') || '';
     const paramClaves = urlParams.get('claves') || '';
-    const paramNotas = urlParams.get('notas') || '';
     const paramGrupo = urlParams.get('grupo') || '';
 
     // Normalizar ID de archivo por si viene URL completa
@@ -481,7 +359,7 @@
     }
 
     async function init() {
-      // 1. Renderizar inmediato lo que viene en URL (personalizado del atleta)
+      // 1. Mostrar lo que viene en URL de inmediato
       if (paramNombre) {
         document.getElementById('exerciseName').textContent = paramNombre;
         document.title = `${paramNombre} • PQ Coach`;
@@ -492,24 +370,6 @@
       if (paramClaves) {
         document.getElementById('cuesText').textContent = paramClaves;
       }
-
-      // Procesar Notas / Apuntes personales de máquina (Columna C)
-      if (paramNotas && paramNotas.trim() !== '') {
-        document.getElementById('notesText').textContent = paramNotas.trim();
-        document.getElementById('notesCard').style.display = 'block';
-      }
-
-      // Detección inteligente de Superserie (en notas o nombre)
-      const fullText = `${paramNombre} ${paramNotas}`.toLowerCase();
-      if (fullText.includes('ss') || fullText.includes('superserie') || fullText.includes('super serie') || fullText.includes('a1') || fullText.includes('a2')) {
-        document.getElementById('ssBadge').style.display = 'inline-flex';
-      }
-
-      // Formatear Reps (con prioridad manual y soporte unilateral)
-      formatReps(paramReps);
-
-      // Formatear Descanso (con prioridad manual y soporte unilateral 1/2)
-      formatDesc(paramDesc);
 
       // 2. Cargar ejercicios.json para autocompletar si falta grupo muscular o claves
       try {
@@ -524,57 +384,6 @@
 
       // 3. Montar video
       setupVideo(currentId);
-    }
-
-    function formatReps(val) {
-      if (!val || val.trim() === '') return;
-      const clean = val.trim();
-      const repsTag = document.getElementById('repsTag');
-      const repsText = document.getElementById('repsText');
-
-      // Si es formato unilateral (ej: "1/10", "1/12", "1/10-12")
-      if (clean.startsWith('1/') || clean.toLowerCase().includes('1 por lado')) {
-        const part = clean.replace(/^1\//, '').trim();
-        repsTag.className = 'meta-pill unilateral';
-        repsText.innerHTML = `<strong>1 por lado</strong> x ${part} reps`;
-        repsTag.style.display = 'inline-flex';
-      } else {
-        repsTag.className = 'meta-pill';
-        const suffix = clean.toLowerCase().includes('rep') ? '' : ' reps';
-        repsText.innerHTML = `<strong>${clean}</strong>${suffix}`;
-        repsTag.style.display = 'inline-flex';
-      }
-    }
-
-    function formatDesc(val) {
-      if (!val || val.trim() === '') return;
-      const clean = val.trim();
-      const descTag = document.getElementById('descTag');
-      const descText = document.getElementById('descText');
-
-      // Si es descanso unilateral (ej: "1/2" -> 1 min entre lados / 2 min entre series)
-      if (clean.includes('/')) {
-        const parts = clean.split('/');
-        let entreLados = parts[0].trim();
-        let entreSeries = parts[1].trim();
-
-        if (/^\d+(\.\d+)?$/.test(entreLados)) entreLados += ' min';
-        if (/^\d+(\.\d+)?$/.test(entreSeries)) entreSeries += ' min';
-
-        descTag.className = 'meta-pill unilateral';
-        descText.innerHTML = `<strong>${entreLados}</strong> e/lados • <strong>${entreSeries}</strong> e/series`;
-        descTag.style.display = 'inline-flex';
-      } else if (/^\d+(\.\d+)?$/.test(clean)) {
-        // Si el coach escribió solo un número (ej: "2", "3", "1.5")
-        descTag.className = 'meta-pill';
-        descText.innerHTML = `<strong>${clean} min</strong>`;
-        descTag.style.display = 'inline-flex';
-      } else {
-        // Texto libre (ej: "90s", "1-2 min")
-        descTag.className = 'meta-pill';
-        descText.innerHTML = `<strong>${clean}</strong>`;
-        descTag.style.display = 'inline-flex';
-      }
     }
 
     function completeFromDatabase() {
@@ -602,13 +411,6 @@
         // Solo usar claves de BD si en la fila de la hoja vinieron vacías
         if (!paramClaves && ex.claves) {
           document.getElementById('cuesText').textContent = ex.claves;
-        }
-        // Solo usar reps/desc de BD si en la fila vinieron vacíos
-        if (!paramReps && ex.reps) {
-          formatReps(ex.reps);
-        }
-        if (!paramDesc && ex.desc) {
-          formatDesc(ex.desc);
         }
       }
     }
