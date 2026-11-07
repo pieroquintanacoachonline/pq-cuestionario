@@ -1,24 +1,12 @@
-========================================================================
-⚡ PQ COACH ONLINE · CENTRAL OFICIAL DE ENLACES
-========================================================================
+﻿PQ COACH ONLINE · ENLACES OFICIALES
+====================================
 
-📋 1. CUESTIONARIO INICIAL DEL ATLETA (NUTRICIÓN & HÁBITOS):
-URL Web Oficial (100% Automatizada con GitHub & Cloudflare):
+CUESTIONARIO INICIAL DEL ATLETA (web)
 https://pq-cuestionario-web.pieroquintana-coachonline.workers.dev
 
-Repositorio GitHub:
+Código del cuestionario (GitHub, se publica solo con cada cambio):
 https://github.com/pieroquintanacoachonline/pq-cuestionario
 
-------------------------------------------------------------------------
-💬 MENSAJE LISTO PARA ENVIAR A TU NUEVO CLIENTE POR WHATSAPP:
-------------------------------------------------------------------------
-¡Hola! Bienvenido(a) al team de PQ Coach Online. Para comenzar con el diseño de tu plan 100% personalizado, por favor completa tu Cuestionario Inicial del Atleta aquí:
-
-https://pq-cuestionario-web.pieroquintana-coachonline.workers.dev
-
-Avísame por aquí en cuanto lo termines para revisar tus respuestas y empezar con tu pauta. 💪
-
-------------------------------------------------------------------------
-🏋️ 2. CUESTIONARIO DE ENTRENAMIENTO:
-(En desarrollo - Próximamente se integrará aquí mismo)
-========================================================================
+Los mensajes para enviar al cliente están en la hoja
+"PQ Coach · Mensajes de WhatsApp" (carpeta 01. SISTEMA CENTRAL & CONTROL).
+Esta carpeta es solo una copia de respaldo del código de la web.
