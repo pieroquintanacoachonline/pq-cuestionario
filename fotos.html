@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PQ Coach Online · Fotos de tu gimnasio</title>
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .file-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:6px}
+    .file-list li{display:flex;justify-content:space-between;gap:10px;font-size:.9rem;padding:8px 12px;border:1px solid var(--input-border);border-radius:10px;background:var(--input-bg)}
+    .file-list .ok{color:#34d399}.file-list .bad{color:#f87171}.file-list .wait{color:var(--text-muted)}
+    .summary{margin-top:12px;font-size:.95rem}
+    input[type=file]{padding:14px;border:1px dashed var(--input-border);border-radius:12px;width:100%;background:var(--input-bg);color:var(--text-main)}
+  </style>
+</head>
+<body>
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-left"></div>
+  <div class="ambient-glow glow-right"></div>
+  <main class="app-container">
+    <header class="brand-header">
+      <div class="logo-wrapper"><img src="logo.png" alt="PQ Coach Online" class="brand-logo"></div>
+      <h1 class="brand-title">Fotos de tu gimnasio</h1>
+      <p class="brand-subtitle">Con ellas tu coach elige los ejercicios que sí puedes hacer</p>
+    </header>
+    <section class="form-card">
+      <div class="form-group full-width">
+        <label for="email">Tu correo <span class="req">*</span></label>
+        <small class="field-hint">El mismo que usaste en tus cuestionarios.</small>
+        <input type="email" id="email" autocomplete="email" placeholder="correo@ejemplo.com">
+      </div>
+      <div class="form-group full-width">
+        <label for="fotos">Fotos de las máquinas y poleas</label>
+        <small class="field-hint">Puedes elegir hasta 30 fotos por vez, y subir más después. Se reducen de tamaño automáticamente.</small>
+        <input type="file" id="fotos" accept="image/*" multiple>
+      </div>
+      <ul class="file-list" id="lista"></ul>
+      <div class="summary" id="resumen" role="status"></div>
+      <div class="step-actions"><button type="button" class="btn btn-submit" id="btnSubir">Subir fotos</button></div>
+      <div class="form-error" id="err" role="alert" style="color:#f87171;margin-top:10px"></div>
+    </section>
+    <footer class="app-footer"><p>© 2026 PQ Coach Online</p></footer>
+  </main>
+  <script src="fotos.js"></script>
+</body>
+</html>
