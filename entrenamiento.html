@@ -43,8 +43,7 @@
           <span class="step-pill active" data-step="1">1. Experiencia</span>
           <span class="step-pill" data-step="2">2. Salud</span>
           <span class="step-pill" data-step="3">3. Disponibilidad</span>
-          <span class="step-pill" data-step="4">4. Gimnasio</span>
-          <span class="step-pill" data-step="5">5. Preferencias</span>
+          <span class="step-pill" data-step="4">4. Preferencias</span>
         </div>
       </div>
     </header>
@@ -53,7 +52,7 @@
       <form id="entForm" novalidate>
 
         <div class="form-step active" id="step-1">
-          <div class="step-header"><span class="step-badge">Paso 1 de 5</span><h2>Tu experiencia</h2></div>
+          <div class="step-header"><span class="step-badge">Paso 1 de 4</span><h2>Tu experiencia</h2></div>
           <div class="form-group full-width">
             <label for="nombre">Tu nombre y apellido <span class="req">*</span></label>
             <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Nombre y apellido">
@@ -71,9 +70,9 @@
             </select>
           </div>
           <div class="form-group full-width">
-            <label>¿Cuánto conoces de estos términos?</label>
-            <small class="field-hint">Responde con honestidad: sirve para explicarte lo justo, sin aburrirte ni dejarte perdido.</small>
-            <div id="terms"></div>
+            <label for="conceptos">¿Qué conceptos de entrenamiento conoces? (opcional)</label>
+            <small class="field-hint">Escríbelo con tus palabras. Por ejemplo: RIR, series efectivas, fallo muscular. Si no conoces ninguno, déjalo en blanco.</small>
+            <textarea id="conceptos" name="conceptos" rows="3" placeholder="Ejemplo: sé qué es el RIR y el fallo, pero no la doble progresión"></textarea>
           </div>
           <div class="form-group full-width">
             <label for="rutinaActual">Tu rutina actual (opcional)</label>
@@ -84,7 +83,7 @@
         </div>
 
         <div class="form-step" id="step-2">
-          <div class="step-header"><span class="step-badge">Paso 2 de 5</span><h2>Tu salud</h2></div>
+          <div class="step-header"><span class="step-badge">Paso 2 de 4</span><h2>Tu salud</h2></div>
           <div class="form-group full-width">
             <label for="lesiones">¿Has tenido alguna lesión o molestia?</label>
             <small class="field-hint">Cuéntame qué fue y, si lo sabes, qué la causó.</small>
@@ -98,7 +97,7 @@
         </div>
 
         <div class="form-step" id="step-3">
-          <div class="step-header"><span class="step-badge">Paso 3 de 5</span><h2>Tu disponibilidad</h2></div>
+          <div class="step-header"><span class="step-badge">Paso 3 de 4</span><h2>Tu disponibilidad</h2></div>
           <div class="form-group full-width">
             <label>¿Qué días puedes entrenar? <span class="req">*</span></label>
             <div class="chips-container" id="chipsDias">
@@ -130,46 +129,8 @@
           <div class="form-error" id="err-3" role="alert"></div>
         </div>
 
-        <div class="form-step" id="step-4">
-          <div class="step-header"><span class="step-badge">Paso 4 de 5</span><h2>Tu gimnasio</h2></div>
-          <div class="form-group full-width">
-            <label for="gimnasio">¿Cómo se llama tu gimnasio?</label>
-            <input type="text" id="gimnasio" name="gimnasio" placeholder="Nombre del gimnasio">
-          </div>
-          <div class="form-group full-width">
-            <label>¿Qué equipo tiene?</label>
-            <div class="eq-grid">
-              <label><input type="checkbox" name="equipo" value="Máquina Smith (multipower)"> Máquina Smith (multipower)</label>
-              <label><input type="checkbox" name="equipo" value="Poleas"> Poleas</label>
-              <label><input type="checkbox" name="equipo" value="Prensa 45"> Prensa 45</label>
-              <label><input type="checkbox" name="equipo" value="Hack squat"> Hack squat</label>
-              <label><input type="checkbox" name="equipo" value="Pec deck"> Pec deck</label>
-              <label><input type="checkbox" name="equipo" value="Jalón y remo en máquina"> Jalón y remo en máquina</label>
-              <label><input type="checkbox" name="equipo" value="Mancuernas pesadas"> Mancuernas pesadas</label>
-              <label><input type="checkbox" name="equipo" value="Barra olímpica"> Barra olímpica</label>
-              <label><input type="checkbox" name="equipo" value="Banco ajustable"> Banco ajustable</label>
-              <label><input type="checkbox" name="equipo" value="Máquinas de pierna"> Máquinas de pierna</label>
-            </div>
-            <small class="field-hint" style="margin-top:10px;display:block">Las fotos de tus máquinas las subes después de enviar el cuestionario, cuando las tengas.</small>
-          </div>
-          <div class="step-actions"><button type="button" class="btn btn-secondary" data-prev>Atrás</button><button type="button" class="btn btn-primary" data-next>Siguiente</button></div>
-        </div>
-
         <div class="form-step" id="step-5">
-          <div class="step-header"><span class="step-badge">Paso 5 de 5</span><h2>Tus preferencias</h2></div>
-          <div class="form-group full-width">
-            <label>¿Qué grupos musculares te gusta más entrenar o quieres mejorar? (opcional, máximo 3)</label>
-            <div class="note-box">Tu coach lo tendrá en cuenta al armar tu plan. Puedes dejarlo en blanco.</div>
-            <div class="chips-container" id="chipsMejorar"></div>
-            <div class="count-hint">Elegidos: <span id="cMejorar">0</span> de 3</div>
-            <div class="count-err" id="eMejorar" role="alert"></div>
-          </div>
-          <div class="form-group full-width">
-            <label>¿Cuáles te gusta menos entrenar? (opcional, máximo 3)</label>
-            <div class="chips-container" id="chipsMenos"></div>
-            <div class="count-hint">Elegidos: <span id="cMenos">0</span> de 3</div>
-            <div class="count-err" id="eMenos" role="alert"></div>
-          </div>
+          <div class="step-header"><span class="step-badge">Paso 4 de 4</span><h2>Tus preferencias</h2></div>
           <div class="form-group full-width">
             <label>¿Qué ejercicios te gustan o te motivan?</label>
             <small class="field-hint">Escríbelos como los conozcas. Tu coach los considerará.</small>
@@ -179,7 +140,7 @@
             <input type="text" id="favPierna" name="favPierna" placeholder="Cuádriceps, isquios y glúteo: ej. prensa, hip thrust">
           </div>
           <div class="step-actions"><button type="button" class="btn btn-secondary" data-prev>Atrás</button><button type="submit" class="btn btn-submit" id="btnEnviar">Enviar cuestionario</button></div>
-          <div class="form-error" id="err-5" role="alert"></div>
+          <div class="form-error" id="err-4" role="alert"></div>
         </div>
       </form>
 

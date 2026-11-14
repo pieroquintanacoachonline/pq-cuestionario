@@ -584,6 +584,8 @@ async function submitOnboarding() {
     );
     const linkWhatsApp = `https://wa.me/${coachPhone}?text=${msgWhatsApp}`;
     document.getElementById('btnAvisarWhatsApp').href = linkWhatsApp;
+    const btnEnt = document.getElementById('btnEntrenamiento');
+    if (btnEnt) btnEnt.href = 'entrenamiento.html?from=nutri&e=' + encodeURIComponent(String(payload.email || '').trim().toLowerCase()) + '&n=' + encodeURIComponent(payload.nombre || '');
 
     window.scrollTo({ top: 100, behavior: 'smooth' });
 
