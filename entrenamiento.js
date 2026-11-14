@@ -2,6 +2,8 @@
 // Envía las respuestas al mismo Apps Script del cuestionario de nutrición (tipo: "entrenamiento").
 const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzTcYeMO610XLqb2nJJdSJLRzZd5e2ZrTbsadgWKV67HirPgeRZ7fW5drXb37UrfB41/exec";
 const COACH_PHONE = "51990601120";
+const TERMINOS = ['Volumen de entrenamiento (series por semana)', 'Series efectivas', 'Intensidad', 'Repeticiones en reserva (RIR)', 'Fallo muscular'];
+const NIVELES = ['Sí', 'No'];
 const $ = (id) => document.getElementById(id);
 const form = $('entForm');
 const steps = [...document.querySelectorAll('.form-step')];
@@ -15,6 +17,15 @@ function show(i) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// Conceptos: una fila por concepto, Sí / No
+TERMINOS.forEach((t, i) => {
+  const row = document.createElement('div');
+  row.className = 'term-row';
+  row.innerHTML = '<b>' + t + '</b><div class="chips-container">' + NIVELES.map((n) =>
+    '<label class="chip-item"><input type="radio" name="term' + i + '" value="' + n + '"><span>' + n + '</span></label>').join('') + '</div>';
+  $('terms').appendChild(row);
+});
+
 function checked(name) { return [...form.querySelectorAll('input[name="' + name + '"]:checked')].map((x) => x.value); }
 function val(id) { return ($(id).value || '').trim(); }
 
@@ -24,7 +35,7 @@ function validar(i) {
     if (!val('nombre')) return 'Escribe tu nombre y apellido.';
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) return 'Escribe un correo válido.';
   }
-  if (i === 2 && checked('dias').length === 0) return 'Elige al menos un día en que puedas entrenar.';
+  if (i === 2 && checked('diasNo').length >= 7) return 'Necesitas al menos un día disponible para entrenar.';
   return '';
 }
 
@@ -69,12 +80,14 @@ form.addEventListener('submit', async (ev) => {
   const err = $('err-4');
   err.textContent = '';
   for (let i = 0; i < 3; i++) { const m = validar(i); if (m) { show(i); const b = $('err-' + (i + 1)); if (b) b.textContent = m; return; } }
+  const terminos = {};
+  TERMINOS.forEach((t, i) => { const r = form.querySelector('input[name="term' + i + '"]:checked'); terminos[t] = r ? r.value : ''; });
   const payload = {
     tipo: 'entrenamiento',
     nombre: val('nombre'), email: val('email').toLowerCase(),
-    tiempoEntrenando: val('tiempoEntrenando'), conceptos: val('conceptos'),
+    tiempoEntrenando: val('tiempoEntrenando'), terminos,
     rutinaActual: val('rutinaActual'), lesiones: val('lesiones'), ejerciciosMolestan: val('ejerciciosMolestan'),
-    dias: checked('dias'), tiempoSesion: val('tiempoSesion'), diaNo: val('diaNo'), cardioPasos: val('cardioPasos'),
+    diasNo: checked('diasNo'), tiempoSesion: val('tiempoSesion'), cardioPasos: val('cardioPasos'),
     favEspalda: val('favEspalda'), favPechoHombro: val('favPechoHombro'), favBicepsTriceps: val('favBicepsTriceps'), favPierna: val('favPierna')
   };
   btn.disabled = true; btn.textContent = 'Enviando…';

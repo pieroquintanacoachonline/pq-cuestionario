@@ -70,9 +70,9 @@
             </select>
           </div>
           <div class="form-group full-width">
-            <label for="conceptos">¿Qué conceptos de entrenamiento conoces? (opcional)</label>
-            <small class="field-hint">Escríbelo con tus palabras. Por ejemplo: RIR, series efectivas, fallo muscular. Si no conoces ninguno, déjalo en blanco.</small>
-            <textarea id="conceptos" name="conceptos" rows="3" placeholder="Ejemplo: sé qué es el RIR y el fallo, pero no la doble progresión"></textarea>
+            <label>¿Conoces estos conceptos?</label>
+            <small class="field-hint">Responde con honestidad: sirve para explicarte lo justo, sin aburrirte ni dejarte perdido.</small>
+            <div id="terms"></div>
           </div>
           <div class="form-group full-width">
             <label for="rutinaActual">Tu rutina actual (opcional)</label>
@@ -99,37 +99,34 @@
         <div class="form-step" id="step-3">
           <div class="step-header"><span class="step-badge">Paso 3 de 4</span><h2>Tu disponibilidad</h2></div>
           <div class="form-group full-width">
-            <label>¿Qué días puedes entrenar? <span class="req">*</span></label>
-            <div class="chips-container" id="chipsDias">
-              <label class="chip-item"><input type="checkbox" name="dias" value="Lunes"><span>Lunes</span></label>
-              <label class="chip-item"><input type="checkbox" name="dias" value="Martes"><span>Martes</span></label>
-              <label class="chip-item"><input type="checkbox" name="dias" value="Miércoles"><span>Miércoles</span></label>
-              <label class="chip-item"><input type="checkbox" name="dias" value="Jueves"><span>Jueves</span></label>
-              <label class="chip-item"><input type="checkbox" name="dias" value="Viernes"><span>Viernes</span></label>
-              <label class="chip-item"><input type="checkbox" name="dias" value="Sábado"><span>Sábado</span></label>
-              <label class="chip-item"><input type="checkbox" name="dias" value="Domingo"><span>Domingo</span></label>
+            <label>¿Qué días NO puedes entrenar? (opcional)</label>
+            <div class="chips-container" id="chipsDiasNo">
+              <label class="chip-item"><input type="checkbox" name="diasNo" value="Lunes"><span>Lunes</span></label>
+              <label class="chip-item"><input type="checkbox" name="diasNo" value="Martes"><span>Martes</span></label>
+              <label class="chip-item"><input type="checkbox" name="diasNo" value="Miércoles"><span>Miércoles</span></label>
+              <label class="chip-item"><input type="checkbox" name="diasNo" value="Jueves"><span>Jueves</span></label>
+              <label class="chip-item"><input type="checkbox" name="diasNo" value="Viernes"><span>Viernes</span></label>
+              <label class="chip-item"><input type="checkbox" name="diasNo" value="Sábado"><span>Sábado</span></label>
+              <label class="chip-item"><input type="checkbox" name="diasNo" value="Domingo"><span>Domingo</span></label>
             </div>
           </div>
           <div class="form-group full-width">
-            <label for="tiempoSesion">¿Cuánto tiempo tienes por sesión?</label>
+            <label for="tiempoSesion">¿Cuánto tiempo tienes como máximo por sesión?</label>
             <select id="tiempoSesion" name="tiempoSesion">
               <option value="">Elige una opción</option>
               <option>40 min</option><option>1 h</option><option>1 h 30</option><option>2 h</option><option>2 h 30</option><option>3 h</option>
             </select>
           </div>
           <div class="form-group full-width">
-            <label for="diaNo">¿Algún día que no puedas entrenar?</label>
-            <input type="text" id="diaNo" name="diaNo" placeholder="Ejemplo: los jueves trabajo hasta tarde">
-          </div>
-          <div class="form-group full-width">
-            <label for="cardioPasos">¿Haces cardio o cuántos pasos das al día?</label>
-            <input type="text" id="cardioPasos" name="cardioPasos" placeholder="Ejemplo: 8.000 pasos, sin cardio">
+            <label for="cardioPasos">¿Sabes cuántos pasos das al día? (opcional)</label>
+            <small class="field-hint">Si no lo sabes, usa un podómetro o un smartwatch y envía la cantidad de un día normal por WhatsApp o al privado.</small>
+            <input type="text" id="cardioPasos" name="cardioPasos" placeholder="Ejemplo: 8.000 pasos">
           </div>
           <div class="step-actions"><button type="button" class="btn btn-secondary" data-prev>Atrás</button><button type="button" class="btn btn-primary" data-next>Siguiente</button></div>
           <div class="form-error" id="err-3" role="alert"></div>
         </div>
 
-        <div class="form-step" id="step-5">
+        <div class="form-step" id="step-4">
           <div class="step-header"><span class="step-badge">Paso 4 de 4</span><h2>Tus preferencias</h2></div>
           <div class="form-group full-width">
             <label>¿Qué ejercicios te gustan o te motivan?</label>
