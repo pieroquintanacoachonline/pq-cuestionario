@@ -63,5 +63,5 @@ $('btnSubir').addEventListener('click', async () => {
   btn.disabled = false; btn.textContent = 'Subir fotos';
   if (detener) err.textContent = detener;
   else if (fallos) err.textContent = fallos + ' foto(s) no se subieron. Vuelve a elegirlas y toca "Subir fotos".';
-  else $('resumen').textContent = '✅ Listo: ' + ok + ' foto(s) subidas. Tu coach ya las puede ver.';
+  else $('resumen').textContent = '✅ Listo: ' + ok + ' foto(s) subidas. Tu coach ya las puede ver. Tu plantilla estará lista entre 24 y 72 horas después de recibir tus fotos.';
 });
