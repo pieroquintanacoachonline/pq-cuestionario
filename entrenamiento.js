@@ -57,11 +57,19 @@ function validar(i) {
   }
   if (i === 2) {
     const d = checked('diasNo');
+    if (d.length === 0) return 'Marca los días que no puedes ir a entrenar, o "Puedo entrenar cualquier día".';
     if (d.length >= 7) return 'Necesitas al menos un día disponible para entrenar.';
     if (!val('tiempoSesion')) return 'Elige cuánto tiempo tienes como máximo por sesión.';
   }
   return '';
 }
+
+// La opción "Puedo entrenar cualquier día" es excluyente con los días marcados
+document.querySelectorAll('input[name="diasNo"]').forEach((c) => c.addEventListener('change', () => {
+  if (!c.checked) return;
+  const libre = c.value === 'Puedo entrenar cualquier día';
+  document.querySelectorAll('input[name="diasNo"]').forEach((o) => { if (o !== c && (libre || o.value === 'Puedo entrenar cualquier día')) o.checked = false; });
+}));
 
 // Si viene del cuestionario de nutrición (o con ?e= / ?n=), el correo y el nombre ya llegan puestos
 const qs = new URLSearchParams(location.search);
