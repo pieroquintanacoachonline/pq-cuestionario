@@ -6,6 +6,7 @@ const LADO_MAX = 1600;
 const CALIDAD = 0.8;
 
 const $ = (id) => document.getElementById(id);
+const CATEGORIA = document.body.dataset.cat || 'gimnasio';
 const params = new URLSearchParams(location.search);
 if (params.get('e')) $('email').value = params.get('e');
 
@@ -60,7 +61,7 @@ $('btnSubir').addEventListener('click', async () => {
     try {
       const blob = await reducir(files[i]);
       const data = await aBase64(blob);
-      const r = await enviar({ tipo: 'foto_gimnasio', email, nombre: files[i].name.replace(/\.[^.]+$/, '') + '.jpg', mime: 'image/jpeg', data, ultima: i === files.length - 1 });
+      const r = await enviar({ tipo: 'foto_gimnasio', categoria: CATEGORIA, email, nombre: files[i].name.replace(/\.[^.]+$/, '') + '.jpg', mime: 'image/jpeg', data, ultima: i === files.length - 1 });
       if (r.status === 'ok') { ok++; estado.className = 'ok'; estado.textContent = 'Subida'; }
       else { fallos++; estado.className = 'bad'; estado.textContent = r.message || 'Error'; if (r.fatal) detener = r.message; }
     } catch (e) { fallos++; estado.className = 'bad'; estado.textContent = 'Falló, reintenta'; }

@@ -2,7 +2,9 @@
 // Envía las respuestas al mismo Apps Script del cuestionario de nutrición (tipo: "entrenamiento").
 const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzTcYeMO610XLqb2nJJdSJLRzZd5e2ZrTbsadgWKV67HirPgeRZ7fW5drXb37UrfB41/exec";
 const COACH_PHONE = "51990601120";
-const TERMINOS = ['Volumen de entrenamiento (series por semana)', 'Series efectivas', 'Intensidad', 'Repeticiones en reserva (RIR)', 'Fallo muscular'];
+const TERMINOS = ['Volumen de entrenamiento', 'Series efectivas', 'Series de aproximación', 'Intensidad (grado de esfuerzo)', 'Repeticiones en reserva (RIR)'];
+// Mismos grupos que BD VARIABLES de la plantilla, sin tibial ni antebrazo
+const MUSCULOS = ['Pectoral', 'Espalda alta', 'Dorsal ancho', 'Espalda baja', 'Bíceps', 'Tríceps', 'Deltoide lateral', 'Deltoide posterior', 'Deltoide anterior', 'Abdominal', 'Cuádriceps', 'Aductores', 'Glúteo', 'Isquiosurales', 'Gemelos'];
 const NIVELES = ['Sí', 'No'];
 const $ = (id) => document.getElementById(id);
 const form = $('entForm');
@@ -26,6 +28,30 @@ TERMINOS.forEach((t, i) => {
   $('terms').appendChild(row);
 });
 
+// Grupos musculares a priorizar: opcional, máximo 3
+const prio = new Set();
+MUSCULOS.forEach((m) => {
+  const lab = document.createElement('label');
+  lab.className = 'chip-item';
+  lab.innerHTML = '<input type="checkbox" value="' + m + '"><span>' + m + '</span>';
+  const input = lab.querySelector('input');
+  input.addEventListener('change', () => {
+    const err = $('ePrioridad');
+    if (input.checked) {
+      if (prio.size >= 3) { input.checked = false; err.textContent = 'Máximo 3 grupos. Quita uno para elegir otro.'; return; }
+      prio.add(m); err.textContent = '';
+    } else { prio.delete(m); err.textContent = ''; }
+    $('cPrioridad').textContent = prio.size;
+  });
+  $('chipsPrioridad').appendChild(lab);
+});
+
+// "Ninguno" es excluyente con los días
+document.querySelectorAll('input[name="diasNo"]').forEach((c) => c.addEventListener('change', () => {
+  if (!c.checked) return;
+  document.querySelectorAll('input[name="diasNo"]').forEach((o) => { if (o !== c && ((c.value === 'Ninguno') || o.value === 'Ninguno')) o.checked = false; });
+}));
+
 function checked(name) { return [...form.querySelectorAll('input[name="' + name + '"]:checked')].map((x) => x.value); }
 function val(id) { return ($(id).value || '').trim(); }
 
@@ -35,7 +61,12 @@ function validar(i) {
     if (!val('nombre')) return 'Escribe tu nombre y apellido.';
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) return 'Escribe un correo válido.';
   }
-  if (i === 2 && checked('diasNo').length >= 7) return 'Necesitas al menos un día disponible para entrenar.';
+  if (i === 2) {
+    const d = checked('diasNo');
+    if (d.length === 0) return 'Marca los días que no puedes o no deseas entrenar, o "Ninguno".';
+    if (d.length >= 7) return 'Necesitas al menos un día disponible para entrenar.';
+    if (!val('tiempoSesion')) return 'Elige cuánto tiempo tienes como máximo por sesión.';
+  }
   return '';
 }
 
@@ -77,7 +108,7 @@ document.querySelectorAll('[data-prev]').forEach((b) => b.addEventListener('clic
 form.addEventListener('submit', async (ev) => {
   ev.preventDefault();
   const btn = $('btnEnviar');
-  const err = $('err-4');
+  const err = $('err-5');
   err.textContent = '';
   for (let i = 0; i < 3; i++) { const m = validar(i); if (m) { show(i); const b = $('err-' + (i + 1)); if (b) b.textContent = m; return; } }
   const terminos = {};
@@ -87,7 +118,7 @@ form.addEventListener('submit', async (ev) => {
     nombre: val('nombre'), email: val('email').toLowerCase(),
     tiempoEntrenando: val('tiempoEntrenando'), terminos,
     rutinaActual: val('rutinaActual'), lesiones: val('lesiones'), ejerciciosMolestan: val('ejerciciosMolestan'),
-    diasNo: checked('diasNo'), tiempoSesion: val('tiempoSesion'), cardioPasos: val('cardioPasos'),
+    prioridad: [...prio], diasNo: checked('diasNo'), tiempoSesion: val('tiempoSesion'), cardioPasos: val('cardioPasos'),
     favEspalda: val('favEspalda'), favPechoHombro: val('favPechoHombro'), favBicepsTriceps: val('favBicepsTriceps'), favPierna: val('favPierna')
   };
   btn.disabled = true; btn.textContent = 'Enviando…';
@@ -105,6 +136,11 @@ form.addEventListener('submit', async (ev) => {
   const nombre = payload.nombre.split(' ')[0];
   $('btnWa').href = 'https://wa.me/' + COACH_PHONE + '?text=' + encodeURIComponent('Hola, soy ' + nombre + ', ya envié mi cuestionario de entrenamiento.');
   $('btnFotos').href = 'fotos.html?e=' + encodeURIComponent(payload.email);
+  $('btnCopiar').addEventListener('click', async () => {
+    const link = new URL($('btnFotos').getAttribute('href'), location.href).href;
+    try { await navigator.clipboard.writeText(link); $('copiado').textContent = '✅ Link copiado. Pégalo en tu navegador cuando tengas las fotos.'; }
+    catch (e) { $('copiado').textContent = link; }
+  });
   if (document.querySelector('.progress-container')) document.querySelector('.progress-container').style.display = 'none';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PQ Coach Online · Fotos de tu gimnasio</title>
+  <title>PQ Coach Online · Foto de tu gimnasio</title>
   <link rel="icon" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,15 +17,15 @@
     input[type=file]{padding:14px;border:1px dashed var(--input-border);border-radius:12px;width:100%;background:var(--input-bg);color:var(--text-main)}
   </style>
 </head>
-<body>
+<body data-cat="gimnasio">
   <div class="ambient-glow glow-top"></div>
   <div class="ambient-glow glow-left"></div>
   <div class="ambient-glow glow-right"></div>
   <main class="app-container">
     <header class="brand-header">
       <div class="logo-wrapper"><img src="logo.png" alt="PQ Coach Online" class="brand-logo"></div>
-      <h1 class="brand-title">Fotos de tu gimnasio</h1>
-      <p class="brand-subtitle">Con ellas tu coach elige los ejercicios que sí puedes hacer</p>
+      <h1 class="brand-title">Foto de tu gimnasio</h1>
+      <p class="brand-subtitle">Con la foto de tu maquinaria, tu coach elegirá los ejercicios y conocerá la maquinaria que tienes a tu disposición.</p>
     </header>
     <section class="form-card">
       <div class="form-group full-width">
@@ -34,7 +34,7 @@
         <input type="email" id="email" autocomplete="email" placeholder="correo@ejemplo.com">
       </div>
       <div class="form-group full-width">
-        <label for="fotos">Fotos de las máquinas y poleas</label>
+        <label for="fotos">Foto de las máquinas, poleas y agarres disponibles de tu gimnasio</label>
         <small class="field-hint">Puedes elegir hasta 30 fotos por vez, y subir más después. Se reducen de tamaño automáticamente.</small>
         <input type="file" id="fotos" accept="image/*" multiple>
       </div>

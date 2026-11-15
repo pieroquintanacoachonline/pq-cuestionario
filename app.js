@@ -587,6 +587,17 @@ async function submitOnboarding() {
     const btnEnt = document.getElementById('btnEntrenamiento');
     if (btnEnt) btnEnt.href = 'entrenamiento.html?from=nutri&e=' + encodeURIComponent(String(payload.email || '').trim().toLowerCase()) + '&n=' + encodeURIComponent(payload.nombre || '');
 
+    const btnFis = document.getElementById('btnFotosFisico');
+    if (btnFis) {
+      btnFis.href = 'fotos-fisico.html?e=' + encodeURIComponent(String(payload.email || '').trim().toLowerCase());
+      document.getElementById('btnCopiarFisico').addEventListener('click', async () => {
+        const link = new URL(btnFis.getAttribute('href'), location.href).href;
+        const msg = document.getElementById('copiadoFisico');
+        try { await navigator.clipboard.writeText(link); msg.textContent = '✅ Link copiado. Pégalo en tu navegador cuando tengas las fotos.'; }
+        catch (e) { msg.textContent = link; }
+      });
+    }
+
     window.scrollTo({ top: 100, behavior: 'smooth' });
 
   } catch (error) {

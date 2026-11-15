@@ -41,9 +41,10 @@
         <div class="progress-bar-track"><div class="progress-bar-fill" id="progressBar"></div></div>
         <div class="step-indicators" id="stepIndicators">
           <span class="step-pill active" data-step="1">1. Experiencia</span>
-          <span class="step-pill" data-step="2">2. Salud</span>
+          <span class="step-pill" data-step="2">2. Lesiones</span>
           <span class="step-pill" data-step="3">3. Disponibilidad</span>
-          <span class="step-pill" data-step="4">4. Preferencias</span>
+          <span class="step-pill" data-step="4">4. Objetivos</span>
+          <span class="step-pill" data-step="5">5. Preferencias</span>
         </div>
       </div>
     </header>
@@ -52,7 +53,7 @@
       <form id="entForm" novalidate>
 
         <div class="form-step active" id="step-1">
-          <div class="step-header"><span class="step-badge">Paso 1 de 4</span><h2>Tu experiencia</h2></div>
+          <div class="step-header"><span class="step-badge">Paso 1 de 5</span><h2>Tu experiencia</h2></div>
           <div class="form-group full-width">
             <label for="nombre">Tu nombre y apellido <span class="req">*</span></label>
             <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Nombre y apellido">
@@ -70,20 +71,21 @@
             </select>
           </div>
           <div class="form-group full-width">
-            <label>¿Conoces estos conceptos?</label>
-            <small class="field-hint">Responde con honestidad: sirve para explicarte lo justo, sin aburrirte ni dejarte perdido.</small>
+            <label>¿Conoces conceptos básicos sobre entrenamiento?</label>
+            <small class="field-hint">Responde con honestidad: sirve para saber la base de conocimiento de la que partimos.</small>
             <div id="terms"></div>
           </div>
           <div class="form-group full-width">
             <label for="rutinaActual">Tu rutina actual (opcional)</label>
-            <textarea id="rutinaActual" name="rutinaActual" rows="3" placeholder="Pega aquí tu rutina si la tienes: días, ejercicios, series"></textarea>
+            <small class="field-hint">Pega la rutina que estás haciendo actualmente: días de entreno, días de descanso, ejercicios, series y rango de repeticiones.</small>
+            <textarea id="rutinaActual" name="rutinaActual" rows="4" placeholder="Pega aquí tu rutina si la tienes"></textarea>
           </div>
           <div class="step-actions"><button type="button" class="btn btn-primary" data-next>Siguiente</button></div>
           <div class="form-error" id="err-1" role="alert"></div>
         </div>
 
         <div class="form-step" id="step-2">
-          <div class="step-header"><span class="step-badge">Paso 2 de 4</span><h2>Tu salud</h2></div>
+          <div class="step-header"><span class="step-badge">Paso 2 de 5</span><h2>Lesiones o molestias</h2></div>
           <div class="form-group full-width">
             <label for="lesiones">¿Has tenido alguna lesión o molestia?</label>
             <small class="field-hint">Cuéntame qué fue y, si lo sabes, qué la causó.</small>
@@ -97,9 +99,10 @@
         </div>
 
         <div class="form-step" id="step-3">
-          <div class="step-header"><span class="step-badge">Paso 3 de 4</span><h2>Tu disponibilidad</h2></div>
+          <div class="step-header"><span class="step-badge">Paso 3 de 5</span><h2>Tu disponibilidad</h2></div>
           <div class="form-group full-width">
-            <label>¿Qué días NO puedes entrenar? (opcional)</label>
+            <label>¿Qué días no puedes o no deseas entrenar? <span class="req">*</span></label>
+            <small class="field-hint">Marca todos los que apliquen. Si puedes cualquier día, marca "Ninguno".</small>
             <div class="chips-container" id="chipsDiasNo">
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Lunes"><span>Lunes</span></label>
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Martes"><span>Martes</span></label>
@@ -108,10 +111,11 @@
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Viernes"><span>Viernes</span></label>
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Sábado"><span>Sábado</span></label>
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Domingo"><span>Domingo</span></label>
+              <label class="chip-item"><input type="checkbox" name="diasNo" value="Ninguno"><span>Ninguno</span></label>
             </div>
           </div>
           <div class="form-group full-width">
-            <label for="tiempoSesion">¿Cuánto tiempo tienes como máximo por sesión?</label>
+            <label for="tiempoSesion">¿Cuánto tiempo tienes como máximo por sesión? <span class="req">*</span></label>
             <select id="tiempoSesion" name="tiempoSesion">
               <option value="">Elige una opción</option>
               <option>40 min</option><option>1 h</option><option>1 h 30</option><option>2 h</option><option>2 h 30</option><option>3 h</option>
@@ -119,7 +123,7 @@
           </div>
           <div class="form-group full-width">
             <label for="cardioPasos">¿Sabes cuántos pasos das al día? (opcional)</label>
-            <small class="field-hint">Si no lo sabes, usa un podómetro o un smartwatch y envía la cantidad de un día normal por WhatsApp o al privado.</small>
+            <small class="field-hint">Si no lo sabes, usa una aplicación de podómetro o un smartwatch y envía la cantidad de un día normal por privado.</small>
             <input type="text" id="cardioPasos" name="cardioPasos" placeholder="Ejemplo: 8.000 pasos">
           </div>
           <div class="step-actions"><button type="button" class="btn btn-secondary" data-prev>Atrás</button><button type="button" class="btn btn-primary" data-next>Siguiente</button></div>
@@ -127,17 +131,28 @@
         </div>
 
         <div class="form-step" id="step-4">
-          <div class="step-header"><span class="step-badge">Paso 4 de 4</span><h2>Tus preferencias</h2></div>
+          <div class="step-header"><span class="step-badge">Paso 4 de 5</span><h2>Tus objetivos</h2></div>
+          <div class="form-group full-width">
+            <label>¿A qué grupos musculares consideras que quieres darles prioridad? (opcional, máximo 3)</label>
+            <div class="chips-container" id="chipsPrioridad"></div>
+            <div class="count-hint">Elegidos: <span id="cPrioridad">0</span> de 3</div>
+            <div class="count-err" id="ePrioridad" role="alert"></div>
+          </div>
+          <div class="step-actions"><button type="button" class="btn btn-secondary" data-prev>Atrás</button><button type="button" class="btn btn-primary" data-next>Siguiente</button></div>
+        </div>
+
+        <div class="form-step" id="step-5">
+          <div class="step-header"><span class="step-badge">Paso 5 de 5</span><h2>Tus preferencias</h2></div>
           <div class="form-group full-width">
             <label>¿Qué ejercicios te gustan o te motivan?</label>
-            <small class="field-hint">Escríbelos como los conozcas. Tu coach los considerará.</small>
+            <small class="field-hint">Escríbelos como los conozcas. Tu coach los considerará para agregarlos en el plan.</small>
             <input type="text" id="favEspalda" name="favEspalda" placeholder="Espalda: ej. jalón al pecho, remo con barra" style="margin-bottom:8px">
             <input type="text" id="favPechoHombro" name="favPechoHombro" placeholder="Pecho y hombro: ej. press inclinado, elevaciones laterales" style="margin-bottom:8px">
             <input type="text" id="favBicepsTriceps" name="favBicepsTriceps" placeholder="Bíceps y tríceps: ej. curl martillo, extensión en polea" style="margin-bottom:8px">
             <input type="text" id="favPierna" name="favPierna" placeholder="Cuádriceps, isquios y glúteo: ej. prensa, hip thrust">
           </div>
           <div class="step-actions"><button type="button" class="btn btn-secondary" data-prev>Atrás</button><button type="submit" class="btn btn-submit" id="btnEnviar">Enviar cuestionario</button></div>
-          <div class="form-error" id="err-4" role="alert"></div>
+          <div class="form-error" id="err-5" role="alert"></div>
         </div>
       </form>
 
@@ -150,8 +165,10 @@
           <a href="#" id="btnWa" target="_blank" rel="noopener" class="btn btn-whatsapp">💬 Avisar por WhatsApp</a>
         </div>
         <div class="whatsapp-alert-box" style="margin-top:14px">
-          <p>📸 <strong>Cuando tengas las fotos de las máquinas de tu gimnasio</strong>, súbelas aquí (puedes hacerlo más tarde):</p>
+          <p>📸 <strong>Foto de tu gimnasio:</strong> con la foto de tu maquinaria, tu coach elegirá los ejercicios. Súbelas ahora o copia el link y hazlo cuando las tengas:</p>
           <a href="fotos.html" id="btnFotos" class="btn btn-secondary">Subir fotos del gimnasio</a>
+          <button type="button" id="btnCopiar" class="btn btn-secondary" style="margin-top:8px">📋 Copiar link para subirlas después</button>
+          <div id="copiado" style="font-size:.9rem;color:#34d399;min-height:20px;margin-top:6px" role="status"></div>
         </div>
       </div>
     </section>
