@@ -14,7 +14,8 @@
     .file-list li{display:flex;justify-content:space-between;gap:10px;font-size:.9rem;padding:8px 12px;border:1px solid var(--input-border);border-radius:10px;background:var(--input-bg)}
     .file-list .ok{color:#34d399}.file-list .bad{color:#f87171}.file-list .wait{color:var(--text-muted)}
     .summary{margin-top:12px;font-size:.95rem}
-    input[type=file]{padding:14px;border:1px dashed var(--input-border);border-radius:12px;width:100%;background:var(--input-bg);color:var(--text-main)}
+    input[type=file]{padding:12px;border:1px dashed var(--input-border);border-radius:12px;width:100%;background:var(--input-bg);color:var(--text-main)}
+    .slot{margin-bottom:14px}
   </style>
 </head>
 <body data-cat="fisico">
@@ -25,9 +26,11 @@
     <header class="brand-header">
       <div class="logo-wrapper"><img src="logo.png" alt="PQ Coach Online" class="brand-logo"></div>
       <h1 class="brand-title">Fotos de tu estado físico</h1>
-      <p class="brand-subtitle">Para evaluar tu progreso de composición corporal. Sigue la guía y sube tus 4 fotos.</p>
+      <p class="brand-subtitle">Para evaluar tu progreso de composición corporal</p>
     </header>
-    <section class="form-card" style="margin-bottom:18px"><img src="guia-fotos.png" alt="Guía para tomar las fotos: de frente, de lado con brazos arriba, de lado con brazos abajo y de espalda" style="width:100%;border-radius:12px;display:block"></section>
+    <section class="form-card" style="margin-bottom:18px">
+      <img src="guia-fotos.svg" alt="Guía para tomar las fotos: de frente, de lado con brazos arriba, de lado con brazos abajo y de espalda" style="width:100%;border-radius:12px;display:block">
+    </section>
     <section class="form-card">
       <div class="form-group full-width">
         <label for="email">Tu correo <span class="req">*</span></label>
@@ -35,9 +38,17 @@
         <input type="email" id="email" autocomplete="email" placeholder="correo@ejemplo.com">
       </div>
       <div class="form-group full-width">
-        <label for="fotos">Tus 4 fotos: de frente, de lado con brazos arriba, de lado con brazos abajo y de espalda</label>
-        <small class="field-hint">Elige las fotos en ese orden. Se reducen de tamaño automáticamente.</small>
-        <input type="file" id="fotos" accept="image/*" multiple>
+        <label>Las 4 fotos de la guía <span class="req">*</span></label>
+        <small class="field-hint">Las 4 son necesarias. Puedes subirlas ahora o más tarde con el mismo link.</small>
+      </div>
+      <div class="slot"><label for="f1">Foto 1 · De frente</label><input type="file" id="f1" accept="image/*"></div>
+      <div class="slot"><label for="f2">Foto 2 · De lado, brazos arriba</label><input type="file" id="f2" accept="image/*"></div>
+      <div class="slot"><label for="f3">Foto 3 · De lado, brazos abajo</label><input type="file" id="f3" accept="image/*"></div>
+      <div class="slot"><label for="f4">Foto 4 · De espalda</label><input type="file" id="f4" accept="image/*"></div>
+      <div class="form-group full-width">
+        <label for="extra">Más fotos (opcional)</label>
+        <small class="field-hint">Si te gusta posar y quieres enviar más, adelante. Si no, no pasa nada.</small>
+        <input type="file" id="extra" accept="image/*" multiple>
       </div>
       <ul class="file-list" id="lista"></ul>
       <div class="summary" id="resumen" role="status"></div>
@@ -46,6 +57,6 @@
     </section>
     <footer class="app-footer"><p>© 2026 PQ Coach Online</p></footer>
   </main>
-  <script src="fotos.js"></script>
+  <script src="fotos-fisico.js"></script>
 </body>
 </html>

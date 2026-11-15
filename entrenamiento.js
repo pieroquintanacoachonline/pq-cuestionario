@@ -4,7 +4,7 @@ const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzTcYeMO610XLqb2nJJ
 const COACH_PHONE = "51990601120";
 const TERMINOS = ['Volumen de entrenamiento', 'Series efectivas', 'Series de aproximación', 'Intensidad (grado de esfuerzo)', 'Repeticiones en reserva (RIR)'];
 // Mismos grupos que BD VARIABLES de la plantilla, sin tibial ni antebrazo
-const MUSCULOS = ['Pectoral', 'Espalda alta', 'Dorsal ancho', 'Espalda baja', 'Bíceps', 'Tríceps', 'Deltoide lateral', 'Deltoide posterior', 'Deltoide anterior', 'Abdominal', 'Cuádriceps', 'Aductores', 'Glúteo', 'Isquiosurales', 'Gemelos'];
+const MUSCULOS = ['Pectoral', 'Espalda alta', 'Dorsal ancho', 'Bíceps', 'Tríceps', 'Deltoide lateral', 'Deltoide posterior', 'Deltoide anterior', 'Abdominal', 'Cuádriceps', 'Aductores', 'Glúteo', 'Isquiosurales', 'Gemelos'];
 const NIVELES = ['Sí', 'No'];
 const $ = (id) => document.getElementById(id);
 const form = $('entForm');
@@ -63,7 +63,7 @@ function validar(i) {
   }
   if (i === 2) {
     const d = checked('diasNo');
-    if (d.length === 0) return 'Marca los días que no puedes o no deseas entrenar, o "Ninguno".';
+    if (d.length === 0) return 'Marca los días que no puedes ir a entrenar, o "Ninguno".';
     if (d.length >= 7) return 'Necesitas al menos un día disponible para entrenar.';
     if (!val('tiempoSesion')) return 'Elige cuánto tiempo tienes como máximo por sesión.';
   }
