@@ -46,12 +46,6 @@ MUSCULOS.forEach((m) => {
   $('chipsPrioridad').appendChild(lab);
 });
 
-// "Ninguno" es excluyente con los días
-document.querySelectorAll('input[name="diasNo"]').forEach((c) => c.addEventListener('change', () => {
-  if (!c.checked) return;
-  document.querySelectorAll('input[name="diasNo"]').forEach((o) => { if (o !== c && ((c.value === 'Ninguno') || o.value === 'Ninguno')) o.checked = false; });
-}));
-
 function checked(name) { return [...form.querySelectorAll('input[name="' + name + '"]:checked')].map((x) => x.value); }
 function val(id) { return ($(id).value || '').trim(); }
 
@@ -63,7 +57,6 @@ function validar(i) {
   }
   if (i === 2) {
     const d = checked('diasNo');
-    if (d.length === 0) return 'Marca los días que no puedes ir a entrenar, o "Ninguno".';
     if (d.length >= 7) return 'Necesitas al menos un día disponible para entrenar.';
     if (!val('tiempoSesion')) return 'Elige cuánto tiempo tienes como máximo por sesión.';
   }
@@ -136,6 +129,7 @@ form.addEventListener('submit', async (ev) => {
   const nombre = payload.nombre.split(' ')[0];
   $('btnWa').href = 'https://wa.me/' + COACH_PHONE + '?text=' + encodeURIComponent('Hola, soy ' + nombre + ', ya envié mi cuestionario de entrenamiento.');
   $('btnFotos').href = 'fotos.html?e=' + encodeURIComponent(payload.email);
+  $('linkFotos').value = new URL($('btnFotos').getAttribute('href'), location.href).href;
   $('btnCopiar').addEventListener('click', async () => {
     const link = new URL($('btnFotos').getAttribute('href'), location.href).href;
     try { await navigator.clipboard.writeText(link); $('copiado').textContent = '✅ Link copiado. Pégalo en tu navegador cuando tengas las fotos.'; }

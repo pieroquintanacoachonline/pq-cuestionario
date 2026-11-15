@@ -101,8 +101,8 @@
         <div class="form-step" id="step-3">
           <div class="step-header"><span class="step-badge">Paso 3 de 5</span><h2>Tu disponibilidad</h2></div>
           <div class="form-group full-width">
-            <label>¿Qué días no puedes ir a entrenar? <span class="req">*</span></label>
-            <small class="field-hint">Marca todos los que apliquen. Si puedes cualquier día, marca "Ninguno".</small>
+            <label>¿Qué días no puedes ir a entrenar?</label>
+            <small class="field-hint">Marca los días que no te sirven. Si puedes cualquier día, no marques ninguno.</small>
             <div class="chips-container" id="chipsDiasNo">
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Lunes"><span>Lunes</span></label>
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Martes"><span>Martes</span></label>
@@ -111,7 +111,6 @@
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Viernes"><span>Viernes</span></label>
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Sábado"><span>Sábado</span></label>
               <label class="chip-item"><input type="checkbox" name="diasNo" value="Domingo"><span>Domingo</span></label>
-              <label class="chip-item"><input type="checkbox" name="diasNo" value="Ninguno"><span>Ninguno</span></label>
             </div>
           </div>
           <div class="form-group full-width">
@@ -165,10 +164,14 @@
           <a href="#" id="btnWa" target="_blank" rel="noopener" class="btn btn-whatsapp">💬 Avisar por WhatsApp</a>
         </div>
         <div class="whatsapp-alert-box" style="margin-top:14px">
-          <p>📸 <strong>Foto de tu gimnasio:</strong> con la foto de tu maquinaria, tu coach elegirá los ejercicios. Súbelas ahora, o copia tu link personal y úsalo más adelante, cuando las tengas:</p>
-          <a href="fotos.html" id="btnFotos" class="btn btn-secondary">Subir fotos del gimnasio</a>
-          <button type="button" id="btnCopiar" class="btn btn-secondary" style="margin-top:8px">📋 Copiar mi link para subirlas más adelante</button>
-          <div id="copiado" style="font-size:.9rem;color:#34d399;min-height:20px;margin-top:6px" role="status"></div>
+          <p>📸 <strong>Foto de tu gimnasio.</strong> Con la foto de tu maquinaria, tu coach elegirá los ejercicios y conocerá el material que tienes a tu disposición.</p>
+          <div style="margin-top:12px;padding:14px;border:2px solid #f59e0b;border-radius:14px;background:rgba(245,158,11,.10)">
+            <p style="margin:0 0 8px"><strong style="color:#fbbf24">⚠ Copia este link y guárdalo.</strong> Es el único lugar donde podrás subir las fotos de tu gimnasio cuando las tengas.</p>
+            <input type="text" id="linkFotos" readonly style="width:100%;margin-bottom:8px;font-size:.85rem" onclick="this.select()">
+            <button type="button" id="btnCopiar" class="btn btn-submit" style="width:100%">📋 Copiar mi link</button>
+            <div id="copiado" style="font-size:.9rem;color:#34d399;min-height:20px;margin-top:6px" role="status"></div>
+          </div>
+          <a href="fotos.html" id="btnFotos" class="btn btn-secondary" style="margin-top:12px">Ya tengo las fotos: subirlas ahora</a>
         </div>
       </div>
     </section>

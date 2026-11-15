@@ -1,10 +1,9 @@
 // Fotos de estado físico · PQ Coach Online
-// 4 fotos obligatorias (frente, lado brazos arriba, lado brazos abajo, espalda) + extras libres.
+// Mínimo 4 fotos (las de la guía) y las extras que quiera; el coach las selecciona.
 const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzTcYeMO610XLqb2nJJdSJLRzZd5e2ZrTbsadgWKV67HirPgeRZ7fW5drXb37UrfB41/exec";
-const MAX_EXTRAS = 20;
+const MAX_FOTOS = 24;
 const LADO_MAX = 1600;
 const CALIDAD = 0.8;
-const POSES = ['1-frente', '2-lado-brazos-arriba', '3-lado-brazos-abajo', '4-espalda'];
 
 const $ = (id) => document.getElementById(id);
 const params = new URLSearchParams(location.search);
@@ -43,11 +42,9 @@ $('btnSubir').addEventListener('click', async () => {
   const email = $('email').value.trim().toLowerCase();
   const err = $('err'); err.textContent = '';
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = 'Escribe un correo válido.'; return; }
-  const cola = [];
-  POSES.forEach((p, i) => { const f = $('f' + (i + 1)).files[0]; if (f) cola.push({ file: f, nombre: 'foto-' + p }); });
-  if (cola.length < 4) { err.textContent = 'Faltan fotos: las 4 de la guía son necesarias (frente, lado brazos arriba, lado brazos abajo y espalda).'; return; }
-  [...$('extra').files].slice(0, MAX_EXTRAS).forEach((f, i) => cola.push({ file: f, nombre: 'extra-' + (i + 1) }));
-  const lista = $('lista'); lista.innerHTML = '';
+  const files = [...$('fotos').files].slice(0, MAX_FOTOS);
+  if (files.length < 4) { err.textContent = 'Sube al menos las 4 fotos de la guía.'; return; }
+  const cola = files.map((f, i) => ({ file: f, nombre: 'foto-' + (i + 1) }));  const lista = $('lista'); lista.innerHTML = '';
   cola.forEach((c, i) => { const li = document.createElement('li'); li.id = 'f_' + i; li.innerHTML = '<span></span><span class="wait">En espera</span>'; li.firstChild.textContent = c.nombre; lista.appendChild(li); });
   const btn = $('btnSubir'); btn.disabled = true; btn.textContent = 'Subiendo…';
   let ok = 0, fallos = 0, detener = '';

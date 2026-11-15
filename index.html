@@ -663,10 +663,15 @@
           </div>
 
           <div class="whatsapp-alert-box" style="margin-top:14px">
-            <p>📸 <strong>Fotos de tu estado físico:</strong> tómalas siguiendo la guía y súbelas ahora, o copia tu link personal y úsalo más adelante, cuando las tengas:</p>
-            <a href="fotos-fisico.html" id="btnFotosFisico" class="btn btn-secondary">Subir fotos de estado físico</a>
-            <button type="button" id="btnCopiarFisico" class="btn btn-secondary" style="margin-top:8px">📋 Copiar mi link para subirlas más adelante</button>
-            <div id="copiadoFisico" style="font-size:.9rem;color:#34d399;min-height:20px;margin-top:6px" role="status"></div>
+            <p>📸 <strong>Fotos de tu estado físico.</strong> Tómalas siguiendo esta guía:</p>
+            <img src="guia-fotos.png" alt="Guía para tomar las 4 fotos de estado físico" style="width:100%;border-radius:12px;display:block;margin:10px 0">
+            <div style="padding:14px;border:2px solid #f59e0b;border-radius:14px;background:rgba(245,158,11,.10)">
+              <p style="margin:0 0 8px"><strong style="color:#fbbf24">⚠ Copia este link y guárdalo.</strong> Es el único lugar donde podrás subir tus fotos cuando las tengas.</p>
+              <input type="text" id="linkFotosFisico" readonly style="width:100%;margin-bottom:8px;font-size:.85rem" onclick="this.select()">
+              <button type="button" id="btnCopiarFisico" class="btn btn-submit" style="width:100%">📋 Copiar mi link</button>
+              <div id="copiadoFisico" style="font-size:.9rem;color:#34d399;min-height:20px;margin-top:6px" role="status"></div>
+            </div>
+            <a href="fotos-fisico.html" id="btnFotosFisico" class="btn btn-secondary" style="margin-top:12px">Ya tengo las fotos: subirlas ahora</a>
           </div>
         </div>
       </section>

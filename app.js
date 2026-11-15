@@ -590,6 +590,7 @@ async function submitOnboarding() {
     const btnFis = document.getElementById('btnFotosFisico');
     if (btnFis) {
       btnFis.href = 'fotos-fisico.html?e=' + encodeURIComponent(String(payload.email || '').trim().toLowerCase());
+      document.getElementById('linkFotosFisico').value = new URL(btnFis.getAttribute('href'), location.href).href;
       document.getElementById('btnCopiarFisico').addEventListener('click', async () => {
         const link = new URL(btnFis.getAttribute('href'), location.href).href;
         const msg = document.getElementById('copiadoFisico');
