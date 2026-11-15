@@ -28,9 +28,9 @@
       <h1 class="brand-title">Fotos de tu estado físico</h1>
       <p class="brand-subtitle">Para evaluar tu progreso de composición corporal</p>
     </header>
-    <section class="form-card" style="margin-bottom:18px">
-      <img src="guia-fotos.png" alt="Guía para tomar las fotos: de frente, de lado con brazos arriba, de lado con brazos abajo y de espalda" style="width:100%;border-radius:12px;display:block">
-    </section>
+    <a href="guia-fotos.png" target="_blank" rel="noopener" title="Toca para ver la guía en grande" style="display:block;width:min(1240px,96vw);margin:0 0 18px 50%;transform:translateX(-50%)">
+      <img src="guia-fotos.png" alt="Guía para tomar las 4 fotos: de frente, de lado con brazos arriba, de lado con brazos abajo y de espalda. Usa siempre el mismo lugar y la misma luz." style="width:100%;border-radius:16px;display:block;box-shadow:0 10px 40px rgba(0,0,0,.45)">
+    </a>
     <section class="form-card">
       <div class="form-group full-width">
         <label for="email">Tu correo <span class="req">*</span></label>
@@ -39,7 +39,7 @@
       </div>
       <div class="form-group full-width">
         <label for="fotos">Tus fotos <span class="req">*</span></label>
-        <small class="field-hint">Sube las 4 fotos de la guía (mínimo 4). Si te gusta posar y quieres enviar más, adelante; si no, no pasa nada.</small>
+        <small class="field-hint">Sube las 4 fotos de la guía. Si quieres compartir más fotos de referencia, puedes hacerlo sin problema.</small>
         <input type="file" id="fotos" accept="image/*" multiple>
       </div>      <ul class="file-list" id="lista"></ul>
       <div class="summary" id="resumen" role="status"></div>
