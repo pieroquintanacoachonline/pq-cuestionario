@@ -29,13 +29,19 @@
     </header>
     <section class="form-card">
       <div class="form-group full-width">
+        <label>Cómo tomar las fotos</label>
+        <p style="margin:6px 0 10px;line-height:1.5">Toma <strong>una foto por cada máquina</strong>, una por una, de manera que se vea completa (asiento, agarres y discos o placas). Haz lo mismo con las poleas y los agarres que tengas disponibles.</p>
+        <img src="ejemplo-maquina.webp" alt="Ejemplo: foto de una máquina completa, con asiento, agarres y discos" style="width:100%;max-width:420px;border-radius:14px;display:block;margin:0 auto">
+        <small class="field-hint" style="text-align:center;display:block;margin-top:6px">Ejemplo de una buena foto: la máquina completa y bien visible.</small>
+      </div>
+      <div class="form-group full-width">
         <label for="email">Tu correo <span class="req">*</span></label>
         <small class="field-hint">El mismo que usaste en tus cuestionarios.</small>
         <input type="email" id="email" autocomplete="email" placeholder="correo@ejemplo.com">
       </div>
       <div class="form-group full-width">
         <label for="fotos">Foto de las máquinas, poleas y agarres disponibles de tu gimnasio</label>
-        <small class="field-hint">Puedes elegir hasta 30 fotos por vez, y subir más después. Se reducen de tamaño automáticamente.</small>
+        <small class="field-hint">Elige todas las fotos juntas: una por máquina. Puedes elegir hasta 30 por vez, y subir más después. Se reducen de tamaño automáticamente.</small>
         <input type="file" id="fotos" accept="image/*" multiple>
       </div>
       <ul class="file-list" id="lista"></ul>
