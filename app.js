@@ -603,7 +603,7 @@ async function submitOnboarding() {
 
   } catch (error) {
     console.error("Error al enviar el formulario:", error);
-    alert("Hubo un detalle de conexión, pero tus respuestas han sido guardadas. Por favor avisa a tu coach por WhatsApp.");
+    alert("No pudimos enviar tus respuestas por un problema de conexión. No se perdieron: siguen en esta página. Revisa tu internet y toca \"Reintentar Envío\". Si no funciona, avisa a tu coach por WhatsApp.");
     btnSubmit.disabled = false;
     btnSubmit.innerHTML = '🚀 Reintentar Envío';
   }
